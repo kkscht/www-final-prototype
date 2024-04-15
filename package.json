@@ -1,0 +1,16 @@
+{
+  "name": "cs160-starter-code",
+  "version": "1.0.0",
+  "description": "Hello friend!",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "CS 160 course staff",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bootstrap": "^3.4.1",
+    "express": "^4.18.2"
+  }
+}

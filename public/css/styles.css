@@ -7,7 +7,7 @@
 body {
   /* These text styles will cascade through every child of the body, unless they are overridden. */
   /* If Arial is not found, use the browser's fallback sans-serif font. */
-  font-family: Arial, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #000000;
 
   margin: 0;
@@ -23,21 +23,58 @@ body {
 nav {
   /* The `flex` attribute controls the width of the column *relative* to other columns. */
   /* Since the total `flex` attributes sum to 10, the nav will take up 20% of the horizontal width. */
-  flex: 2;
-
-  background-color: #ffe4e4;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  justify-content: space-evenly;
+  bottom: 0;
+  width: 100%;
+  background-color: #F0F0F0;
   text-align: center;
-  padding: 10px;
 }
 
 /* Style all link tags within nav elements */
 nav a {
-  background-color: #e9ffea;
+  font-size: 16px;
   padding: 8px;
-  margin-top: 7px;
+  top: 50%;
   display: block;
   width: 100%;
-  color: black;
+  color: #8b8b8b;
+}
+
+/* Style all icons within nav elements */
+nav a i {
+  font-size: 32px; 
+  position: absolute; 
+  top: -30px; 
+  color: inherit; 
+}
+
+/* Default style for nav links
+.nav-link {
+  top: 50%;
+  display: block;
+  width: 100%;
+  color: #8b8b8b;
+}
+
+/* Default style for nav link icons */
+/* .nav-link i {
+  font-size: 32px;
+  position: absolute;
+  top: -30px;
+  color: inherit;
+} */ 
+
+/* Style for active nav link */
+nav a.active {
+  color: #F16291;
+}
+
+/* Style for active nav link icon */
+nav a.active i {
+  color: #F16291;
 }
 
 /* Makes sure affected elements don't exceed the bounds of their container. */
@@ -57,7 +94,7 @@ nav a {
 }
 
 main {
-  background-color: #ffe2e0;
+  background-color: #FBD0DE;
   flex: 6;
   padding: 0 20px;
 }
@@ -74,5 +111,14 @@ footer {
     /* The main sections are still in a Flexbox layout; this just changes the Flexbox configuration */
     /* so that adjacent elements will render vertically instead of horizontally. */
     flex-direction: column;
+    /* flex-direction: row; */
+  }
+
+  nav a {
+    font-size: 8px;
+  }
+
+  nav a i {
+    font-size: 16px;
   }
 }

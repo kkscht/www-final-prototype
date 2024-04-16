@@ -70,18 +70,22 @@ app.get('/add/:first/:second', (request, response) => {
 //   filesystem operation before responding to the user.
 // Try visiting http://localhost:8000/a rather than http://localhost:8000/a.html -- you'll notice that
 //   it works just the same!
-app.get('/a', async (request, response) => {
-  const htmlContents = await fs.readFile('public/a.html');
+app.get('/dashboard', async (request, response) => {
+  const htmlContents = await fs.readFile('public/dashboard.html');
   response.status(200).send(htmlContents.toString());
 });
 
 // Express has a helper function for this, so we don't need to use the filesystem library directly:
-app.get('/b', (request, response) => {
-  response.status(200).sendFile('public/b.html', { root: __dirname }); // We do need to tell Express where to look!
+app.get('/safety', (request, response) => {
+  response.status(200).sendFile('public/safety.html', { root: __dirname }); // We do need to tell Express where to look!
 });
 
-app.get('/c', (request, response) => {
-  response.status(200).sendFile('public/c.html', { root: __dirname });
+app.get('/map', (request, response) => {
+  response.status(200).sendFile('public/map.html', { root: __dirname });
+});
+
+app.get('/na', (request, response) => {
+  response.status(200).sendFile('public/na.html', { root: __dirname });
 });
 
 // Now, we can access our HTML using these more convenient `/a`, `/b`, and `/c` routes.

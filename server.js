@@ -88,7 +88,10 @@ app.get('/na', (request, response) => {
   response.status(200).sendFile('public/na.html', { root: __dirname });
 });
 
-// Now, we can access our HTML using these more convenient `/a`, `/b`, and `/c` routes.
+app.get('/na-current', (request, response) => {
+  response.status(200).sendFile('public/na-current.html', { root: __dirname });
+});
+
 
 
 // Finally, we tell this server to listen for new requests. This line is what makes the Node process

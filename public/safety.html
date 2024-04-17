@@ -26,6 +26,18 @@
      h1 {
       font-family: "Cabin";
      }
+     
+     header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .home.hidden,
+      .btn.hidden {
+        display: none;
+      }
+
       
     </style>
       
@@ -68,7 +80,7 @@
       </nav>
       
       <div id="menu-bar">
-        <button class="btn btn-secondary hidden" id="home-button">Back</button>
+        <button class="btn btn-secondary hidden" id="home-button" style="padding: 5px">Back</button>
       </div>
 
       <div class="card mb-3" role="button" id="alekhine-button">

@@ -16,17 +16,11 @@
   <!-- you can also specify styles straight in HTML! these will almost override CSS stylesheets. -->
   <!-- let's make this page use comic sans and dark blue for the body text. -->
   <body
-    style="background-color: #FBD0DE; text-align: center"
+    style="background-color: white; text-align: center"
   >
-    <header
-      style="
-        background-color: #d7d7eb;
-        padding: 15px;
-        text-align: center;
-        color: #ffffff;
-      "
+    <header style="background-color: white; padding: 10px; text-align: center;"
     >
-      <h1>Dashboard</h1>
+      <h1 style="font-size: 30px;">Dashboard</h1>
     </header>
 
     <div class="site-view">
@@ -39,23 +33,81 @@
       </nav>
 
       <main>
-        <h2>Check out this cool rabbit!</h2>
-        <img
-          src="/images/bunny.jpg"
-          alt="a rabbit"
-          class="responsive centered"
-        />
-        <p>
-          Photo credits:
-          <a href="https://unsplash.com/photos/u_kMWN-BWyU">
-            Satyabratasm on Unsplash
-          </a>
-        </p>
+        <div class="dashboard">
+    
+          <div class="profile">
+            <div class="avatar-container">
+              <img src="/images/default_avatar.png" alt="Avatar" class="avatar">
+            </div>
+            <h4 class="name">FirstName LastName</h4>
+          </div>
+          <div class="menu">
+        
+            <button>All Trips</button>
+            <button>Edit Profile</button>
+            <button>Bookmarks</button>
+            <button>Settings</button>
+        
+          </div>
+
+  
+         
+          <div class="profile-info">
+            
+            <div class="content" id="content">
+              <section class="travel-info">
+                  <h5>Travel Information</h5>
+                  <p>
+                      hi
+                  </p>
+              </section>
+              <section class="bio">
+                  <h5>Bio</h5>
+                  <p>Ut enim ad minim veniam</p>
+              </section>
+              <section class="languages">
+                  <h5>Languages</h5>
+                  <div class="tags">
+                      <span>English</span>
+                      <span>Arabic</span>
+                  </div>
+              </section>
+              <section class="hobbies">
+                  <h5>Hobbies</h5>
+                  <div class="tags">
+                      <span>Lorem</span>
+                      <span>Lorem ipsum dolor</span>
+                  </div>
+              </section>
+              <section class="interests">
+                  <h5>Interests</h5>
+                  <div class="tags">
+                      <span>Lorem</span>
+                      <span>Lorem ipsum dolor</span>
+                      <span>Lorem</span>
+                      <span>Lorem ipsum dolor sit amet</span>
+                  </div>
+              </section>
+         
+          
+          </div>
+          
+          <div class="scrollbar-background"></div>
+        </div>
+
+
+          </div>
+          
+          </div>
+          
+        </div>
       </main>
 
 
     </div>
+    <script src="js/dashboard.js"></script>
   </body>
+
   <script>
     // Get the current page URL
     var currentPageUrl = window.location.href;

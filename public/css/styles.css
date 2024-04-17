@@ -94,10 +94,11 @@ nav a.active i {
 }
 
 main {
-  background-color: #FBD0DE;
+  background-color: white;
   flex: 6;
   padding: 0 20px;
 }
+
 
 footer {
   background-color: #eafeff;
@@ -122,3 +123,155 @@ footer {
     font-size: 16px;
   }
 }
+
+  
+  .dashboard {
+    text-align: center;
+    
+  }
+  
+  .header h1 {
+    margin-bottom: 20px;
+  }
+  
+  .profile {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .avatar-container {
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #E91E63;
+  }
+  
+  .avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #E91E63;
+    display: block;
+  }
+  
+  .name {
+    color: black;
+    margin-top: 20px;
+  }
+  
+  .menu button {
+    background: #FBD0DE;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 3px;
+    font-size: 10px;
+    color: black;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .menu button:hover {
+    background: #E91E63;
+    color: #fff;
+  }
+
+  /* Demonstrate a "mostly customized" scrollbar
+ * (won't be visible otherwise if width/height is specified) */
+.mostly-customized-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa; /* or add it to the track */
+}
+
+/* Add a thumb */
+.mostly-customized-scrollbar::-webkit-scrollbar-thumb {
+  background: #000;
+}
+
+  .profile-info {
+    background: #FBD0DE;
+    border: 1.5px solid black;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-top: 20px;
+    font-size: 10px;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    height: 500px;
+  
+    position: relative;
+    overflow: scroll;
+    scrollbar-color: red orange;
+    scrollbar-width:thick;
+    scroll-margin-right: 40px;
+  }
+
+
+
+
+
+  
+
+
+
+
+h5 {
+  text-align: left;
+  margin-bottom: 3px;
+  margin-top: 10px;
+}
+
+
+
+.content {
+    height: 100%;
+    overflow-y: scroll;
+    padding: 10px;
+    width: 95%;
+    float: left;
+}
+
+.scrollbar-background {
+  height: 100%;
+  background-color: #F16291;
+  width: 20px;
+  float: right;
+  position:absolute;
+  right: 15px;
+  top: 10px;
+  bottom: 10px;
+
+}
+
+
+
+
+
+p {
+    text-align: left;
+    margin: 0px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tags span {
+    background: none;
+    border: 1px solid #E91E63;
+    border-radius: 20px;
+    padding: 4px 8px;
+
+    font-size: 9px;
+    color: black;
+    cursor: pointer;
+    outline: none;
+}
+
+
+
+
+  

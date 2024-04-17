@@ -26,7 +26,11 @@
      h1 {
       font-family: "Cabin";
      }
-     
+
+     h2 {
+      font-family: "Inter";
+     }
+
      header {
         display: flex;
         justify-content: space-between;
@@ -38,6 +42,18 @@
         display: none;
       }
 
+      .element-blurb {
+        background-color: white;
+        padding: 2rem;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+        display: flex;
+        gap: 4rem;
+        align-items: center;
+
+        &.hidden {
+          display: none;
+        }
+      }
       
     </style>
       
@@ -83,20 +99,36 @@
         <button class="btn btn-secondary hidden" id="home-button" style="padding: 5px">Back</button>
       </div>
 
-      <div class="card mb-3" role="button" id="alekhine-button">
+      <div class="card mb-3" role="button" id="emergency-numbers-button">
         <div class="row g-0">
           <div class="col-md-4">
-            <img
+            <!-- <img
               src="/images/alekhine.png"
               class="img-fluid rounded-start"
               alt="A depiction of the planet Alekhine, produced by SXDL 1.0"
-            />
+            /> -->
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h2 class="card-title">Alekhine</h2>
+              <h2 class="card-title">Emergency numbers</h2>
             </div>
           </div>
+        </div>
+      </div>
+
+
+      <div class="hidden element-blurb" id="emergency-numbers-blurb">
+        <div class="planet-image">
+          <!-- <img
+            src="/images/alekhine.png"
+            alt="A depiction of the planet Alekhine, produced by SXDL 1.0"
+          /> -->
+        </div>
+         <div class="section-info">  <!-- planet-info -->
+          <h2>Emergency Numbers</h2>
+          <p>
+            this is a silly little test of the emergency numbers system
+          </p>
         </div>
       </div>
 
@@ -104,6 +136,7 @@
     </div>
   </body>
   <script>
+    ///////// Active navbar logic /////////
     // Get the current page URL
     var currentPageUrl = window.location.href;
 
@@ -118,5 +151,37 @@
         navLink.classList.add('active');
       }
     });
+    /////////  /////////  /////////  /////////
+
+    ///////// Hide and show sections logic /////////
+    const blurbElements = {
+      Emergency: document.getElementById("emergency-numbers-blurb")
+    };
+
+    const navigateToBlurb = (sectionName) => {
+        if (!blurbElements[sectionName]) {
+          throw new Error(`No blurb found for planet ${sectionName}`);
+        }
+
+        for (const [name, blurbElement] of Object.entries(blurbElements)) {
+          if (name === sectionName) {
+            blurbElement.classList.remove("hidden");
+          } else {
+            blurbElement.classList.add("hidden");
+          }
+        }
+
+        document.getElementById("home-page").classList.add("hidden");
+        document.getElementById("home-button").classList.remove("hidden");
+      };
+
+    document
+        .getElementById("emergency-numbers-button")
+        .addEventListener("click", () => {
+          navigateToBlurb("Emergency");
+        });
+
+
+
   </script>
 </html>

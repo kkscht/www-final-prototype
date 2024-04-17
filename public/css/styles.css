@@ -201,12 +201,20 @@ footer {
     height: 500px;
   
     position: relative;
-    overflow: scroll;
-    scrollbar-color: red orange;
-    scrollbar-width:thick;
-    scroll-margin-right: 40px;
-  }
+   
+  
 
+    display: block;
+    
+
+    overflow-y: scroll;
+
+
+    margin: 1em auto;
+    scroll-margin-right: 20px;
+    
+    
+  }
 
 
 
@@ -271,6 +279,34 @@ p {
     outline: none;
 }
 
+
+
+
+
+
+/* Demonstrate a "mostly customized" scrollbar
+ * (won't be visible otherwise if width/height is specified) */
+ .profile-info::-webkit-scrollbar {
+ 
+
+  background-color: #F16291; /* or add it to the track */
+
+  height: 90%;
+  width: 20px;
+  float: right;
+  position:absolute;
+  right: 10;
+  top: 10px;
+  bottom: 10px;
+  scroll-margin-right: 20px;
+
+}
+
+/* Add a thumb */
+.profile-info::-webkit-scrollbar-thumb {
+  background: black;
+  height: 2em;
+}
 
 
 

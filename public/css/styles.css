@@ -24,7 +24,6 @@ nav {
   /* The `flex` attribute controls the width of the column *relative* to other columns. */
   /* Since the total `flex` attributes sum to 10, the nav will take up 20% of the horizontal width. */
   display: flex;
-  flex-direction: row;
   position: fixed;
   justify-content: space-evenly;
   bottom: 0;
@@ -97,6 +96,8 @@ main {
   background-color: white;
   flex: 6;
   padding: 0 20px;
+  height: 85%;
+  position: fixed;
 }
 
 
@@ -202,18 +203,9 @@ footer {
     color: black;
     cursor: pointer;
     outline: none;
-    height: 500px;
-  
-    position: relative;
+    height: 400px;
    
-  
-
-    display: block;
-    
-
     overflow-y: scroll;
-
-
     margin: 1em auto;
     scroll-margin-right: 20px;
     
@@ -228,23 +220,12 @@ h5 {
 
 .content {
     height: 100%;
-    overflow-y: scroll;
     padding: 10px;
     width: 95%;
     float: left;
 }
 
-.scrollbar-background {
-  height: 100%;
-  background-color: #F16291;
-  width: 20px;
-  float: right;
-  position:absolute;
-  right: 15px;
-  top: 10px;
-  bottom: 10px;
 
-}
 
 p {
     text-align: left;
@@ -273,14 +254,10 @@ p {
 /* Demonstrate a "mostly customized" scrollbar
  * (won't be visible otherwise if width/height is specified) */
  .profile-info::-webkit-scrollbar {
- 
-
   background-color: #F16291; /* or add it to the track */
-
   height: 90%;
   width: 20px;
   float: right;
-  position:absolute;
   right: 10;
   top: 10px;
   bottom: 10px;

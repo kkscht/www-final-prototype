@@ -74,13 +74,49 @@
         </svg></i><br>Dashboard</a>
       </nav>
 
-      <main>
-        
-        <p>
-            Under construction.
-        </p>
-      </main>
-    </div>
+
+
+
+ 
+        <form id="profile-form" class="profile-form"> <div class="custom-scroll">
+          <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first_name" placeholder="FirstName">
+          </div>
+          <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last_name" placeholder="LastName">
+          </div>
+          <div class="form-group">
+            <label for="phone-number">Phone Number</label>
+            <input type="tel" id="phone-number" name="phone_number" placeholder="+ 123 456 7890">
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea id="bio" name="bio" placeholder="Your bio..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Languages</label>
+            <div class="checkbox-group">
+              <input type="checkbox" id="english" name="language_english">
+              <label for="english">English</label>
+              <input type="checkbox" id="arabic" name="language_arabic">
+              <label for="arabic">Arabic</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="interests">Interests</label>
+            <textarea id="interests" name="interests" placeholder="Your interests..."></textarea>
+          </div>
+         
+        </div>
+        </form>
+      </div>
+        <button id="submit" type="submit" class="update-button">Update</button>
+      <script src="script.js"></script>
+
+
+
 
   </body>
   <script>

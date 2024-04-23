@@ -22,22 +22,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:wght@100..900"
     rel="stylesheet">
 
-   <style>
-    h1 {
-     font-family: "Cabin";
-    }
+    <style>
+      h1 {
+      font-family: "Cabin";
+      }
     </style>
   </head>
 
   <!-- you can also specify styles straight in html! Let's use Courier New and brown text on this page.-->
   <body style="font-family: Arial; color: #14130f">
-    <header
-      style="background-color: #FBD0DE; padding: 15px; text-align: center"
-    >
-      <h1>Map</h1>
-    </header>
 
     <div class="site-view">
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
+      
       <nav>
         <!-- <a href="/na-current" class="nav-link"><i class="glyphicon glyphicon-plane"></i><br>Current Trip</a>
         <a href="/map" class="nav-link"><i class="glyphicon glyphicon-map-marker"></i><br>Map</a>
@@ -64,24 +63,12 @@
         </svg></i><br>Dashboard</a>
       </nav>
 
-      <!--let's override the background-color style from my stylesheet to make this section sepiatone, too.-->
-      <main style="background-color: #fff6e6">
-        <h2>This rabbit is sepiatone and likes to eat turnips.</h2>
-        <img
-          src="/images/sepiabunny.jpg"
-          alt="a sepiatone rabbit"
-          class="responsive centered"
-        />
-        <p>
-          Photo credits:
-          <a href="https://unsplash.com/photos/u_kMWN-BWyU"
-            >Satyabratasm on Unsplash
-          </a>
-        </p>
-      </main>
-
     </div>
   </body>
+
+  <!-- Google Maps API Import -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr7TfjKOJDd-_u7gMjc4grL9WVC4F3TvI&callback=initMap" async defer></script>
+  
   <script>
     // Get the current page URL
     var currentPageUrl = window.location.href;
@@ -97,5 +84,41 @@
         navLink.classList.add('active');
       }
     });
+
+    function initMap() {
+
+      // Initialize map with default location (Metropolitan Museum of Art)
+      var defaultLocation = { lat: 40.779437, lng: -73.963244 }; // Metropolitan Museum of Art coordinates
+      var map = new google.maps.Map(document.getElementById('map'), {
+          center: defaultLocation,
+          zoom: 15
+      });
+
+      // Try HTML5 geolocation to get the user's current position
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+              var userLocation = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+              };
+              map.setCenter(userLocation);
+          }, function() {
+              handleLocationError(true, map.getCenter());
+          });
+      } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, map.getCenter());
+      }
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        // Handle errors when getting user's location
+        // You can customize this function to display an error message
+        // or perform other actions
+        console.error("Error: The Geolocation service failed.");
+    }
+
+    initMap();
+
   </script>
 </html>

@@ -17,7 +17,9 @@ body {
 .site-view {
   /* This lets us arrange the child elements of the main view in a row. */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
 }
 
 nav {
@@ -30,6 +32,7 @@ nav {
   width: 100%;
   background-color: #F0F0F0;
   text-align: center;
+  z-index: 1;
 }
 
 /* Style all link tags within nav elements */
@@ -50,22 +53,6 @@ nav a i {
   color: inherit; 
 }
 
-/* Default style for nav links
-.nav-link {
-  top: 50%;
-  display: block;
-  width: 100%;
-  color: #8b8b8b;
-}
-
-/* Default style for nav link icons */
-/* .nav-link i {
-  font-size: 32px;
-  position: absolute;
-  top: -30px;
-  color: inherit;
-} */ 
-
 /* Style for active nav link */
 nav a.active {
   color: #F16291;
@@ -74,6 +61,23 @@ nav a.active {
 /* Style for active nav link icon */
 nav a.active i {
   color: #F16291;
+}
+
+/* Style for Google Map API Container, sized to fit above nav bar*/
+.map-container {
+  flex: 1; /* Make the map container expand to fill remaining space */
+  position: absolute; /* Position absolutely within the site-view container */
+  top: 0; /* Position at the top of the site-view container */
+  left: 0; /* Position at the left of the site-view container */
+  width: 100%; /* Occupy full width */
+  height: calc(100% - 40px); /* Subtract the height of the nav bar */
+  z-index: 0; /* Ensure the map stays below the nav bar */
+}
+
+/* Style for Google Map API */
+#map {
+  width: 100%;
+  height: 100%;
 }
 
 /* Makes sure affected elements don't exceed the bounds of their container. */
@@ -298,8 +302,6 @@ p {
   margin-top: 10px;
   font-size: 1em;
 }
-
-
 
 .profile-form {
   height: 550px;

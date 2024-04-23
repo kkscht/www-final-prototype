@@ -304,7 +304,7 @@ p {
 }
 
 .profile-form {
-  height: 550px;
+  height: 400px;
   background-color: #fff;
   margin: 20px auto;
   padding: 20px;
@@ -357,15 +357,35 @@ textarea {
   margin-bottom: 70px;
 
   display: flex;
-  position: fixed;  /* Changed from absolute to fixed */
-  bottom: 20px;     /* Height of the nav bar + any additional space you might want */
+  position: fixed;  
+  bottom: 20px;    
   transform: translateX(-50%);   
   left: 50%; 
   text-align: center;
   align-items: center;
-  z-index: 1000;    /* Ensure it is above other content */
+  z-index: 1000;    
 }
 
 .update-button:hover {
   background-color: #c2185b;
+}
+
+.card {
+  margin: 0 auto;
+}
+
+.profile-name-input {
+  margin-bottom: 16px;
+}
+
+.profile-card {
+  max-width: 400px;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 6px;
+  margin: 12px auto;
+  display: block;
 }

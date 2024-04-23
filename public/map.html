@@ -36,7 +36,7 @@
       <div class="map-container">
         <div id="map"></div>
       </div>
-      
+
       <nav>
         <!-- <a href="/na-current" class="nav-link"><i class="glyphicon glyphicon-plane"></i><br>Current Trip</a>
         <a href="/map" class="nav-link"><i class="glyphicon glyphicon-map-marker"></i><br>Map</a>
@@ -91,7 +91,8 @@
       var defaultLocation = { lat: 40.779437, lng: -73.963244 }; // Metropolitan Museum of Art coordinates
       var map = new google.maps.Map(document.getElementById('map'), {
           center: defaultLocation,
-          zoom: 15
+          zoom: 15,
+          disableDefaultUI: true
       });
 
       // Try HTML5 geolocation to get the user's current position

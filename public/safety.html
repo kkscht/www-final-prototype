@@ -54,7 +54,27 @@
           display: none;
         }
       }
-      
+
+      #menu-bar {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        /* justify-content: space-between;
+        align-items: center; */
+      }
+
+      .planet-image {
+        flex: 1;
+      }
+
+      .section-info{
+        flex: 2;
+      }
+      #location-fetch-header{
+        display:flex;
+        justify-content: space-around;
+      }
+
     </style>
       
   </head>
@@ -95,26 +115,52 @@
         </svg></i><br>Dashboard</a>
       </nav>
       
-      <div id="menu-bar">
-        <button class="btn btn-secondary hidden" id="home-button" style="padding: 5px">Back</button>
-      </div>
+        <div id="menu-bar">
+          <div id="location-fetch-header">
+            <div id="load-location" class="loader">
+              
+            </div>
+            <h3 style="padding-left: 15px; padding-top: 2px;">Fetching location...</h3>
 
-      <div class="card mb-3" role="button" id="emergency-numbers-button">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <!-- <img
-              src="/images/alekhine.png"
-              class="img-fluid rounded-start"
-              alt="A depiction of the planet Alekhine, produced by SXDL 1.0"
-            /> -->
+            
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h2 class="card-title">Emergency numbers</h2>
+          <button class="btn btn-secondary hidden" id="home-button" style="padding: 5px">Back</button>
+        </div>
+
+
+        <div id="home-page" class="home">
+        
+          <div class="card mb-3" role="button" id="emergency-numbers-button">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <!-- add container-defining element here -->
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h2 class="card-title">Emergency numbers</h2>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="card mb-3" role="button" id="safety-button">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <!-- add container-defining element here -->
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h2 class="card-title">General Safety</h2>
+
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-      </div>
+      <!-- end home-page section -->
 
 
       <div class="hidden element-blurb" id="emergency-numbers-blurb">
@@ -128,6 +174,21 @@
           <h2>Emergency Numbers</h2>
           <p>
             this is a silly little test of the emergency numbers system
+          </p>
+        </div>
+      </div>
+
+      <div class="hidden element-blurb" id="safety-blurb">
+        <div class="planet-image">
+          <!-- <img
+            src="/images/alekhine.png"
+            alt="A depiction of the planet Alekhine, produced by SXDL 1.0"
+          /> -->
+        </div>
+         <div class="section-info">  <!-- planet-info -->
+          <h2>General Safety</h2>
+          <p>
+            gosh isn't this so silly?
           </p>
         </div>
       </div>
@@ -155,12 +216,15 @@
 
     ///////// Hide and show sections logic /////////
     const blurbElements = {
-      Emergency: document.getElementById("emergency-numbers-blurb")
+      Emergency: document.getElementById("emergency-numbers-blurb"),
+      Safety: document.getElementById("safety-blurb")
     };
+
+    
 
     const navigateToBlurb = (sectionName) => {
         if (!blurbElements[sectionName]) {
-          throw new Error(`No blurb found for planet ${sectionName}`);
+          throw new Error(`No blurb found for ${sectionName} section`);
         }
 
         for (const [name, blurbElement] of Object.entries(blurbElements)) {
@@ -170,18 +234,41 @@
             blurbElement.classList.add("hidden");
           }
         }
-
         document.getElementById("home-page").classList.add("hidden");
         document.getElementById("home-button").classList.remove("hidden");
+
+        
       };
 
     document
         .getElementById("emergency-numbers-button")
         .addEventListener("click", () => {
           navigateToBlurb("Emergency");
+          
         });
 
+    document
+        .getElementById("safety-button")
+        .addEventListener("click", () => {
+          navigateToBlurb("Safety");
+          
+        });
 
+      ////// home functionality
 
+      const navigateHome = () => {
+        for (const blurbElement of Object.values(blurbElements)) {
+          blurbElement.classList.add("hidden");
+        }
+
+        document.getElementById("home-page").classList.remove("hidden");
+        document.getElementById("home-button").classList.add("hidden");
+      };
+      
+      document.getElementById("home-button").addEventListener("click", () => {
+        navigateHome();
+      });
+
+      
   </script>
 </html>

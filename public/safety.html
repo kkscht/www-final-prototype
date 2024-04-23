@@ -72,9 +72,100 @@
       }
       #location-fetch-header{
         display:flex;
-        justify-content: space-around;
+        flex:1 1;
+        justify-content: start;
       }
 
+      #dot-loader {
+        display: flex;
+      
+        &.hidden {
+          display: none;
+        }
+      }
+
+      .dot-container {
+        display: flex;
+
+        &.hidden {
+          display: none;
+        }
+      }
+
+      .location-loaded {
+        display: flex;
+
+        &.hidden {
+          display: none;
+        }
+      }
+      .location-pin-icon {
+        display: flex;
+
+        &.hidden {
+          display: none;
+        }
+      }
+
+    </style>
+    <style>
+      /**
+      * ==============================================
+      * Dot Flashing
+      * Credits: https://codepen.io/nzbin/pen/GGrXbp 
+      * ==============================================
+      */
+      .dot-flashing {
+        position: relative;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #E91E63;
+        color: #E91E63;
+        animation: dot-flashing 1s infinite linear alternate;
+        animation-delay: 0.5s;
+        
+      }
+
+      .dot-flashing::before, .dot-flashing::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: 0;
+
+      }
+      .dot-flashing::before {
+        left: -15px;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #E91E63;
+        color: #E91E63;
+        animation: dot-flashing 1s infinite alternate;
+        animation-delay: 0s;
+
+      }
+      .dot-flashing::after {
+        left: 15px;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #E91E63;
+        color: #E91E63;
+        animation: dot-flashing 1s infinite alternate;
+        animation-delay: 1s;
+
+      }
+
+      @keyframes dot-flashing {
+        0% {
+          background-color: #E91E63;
+        }
+        50%, 100% {
+          background-color: rgba(255, 128, 215, 0.2);
+        }
+      }
+      /* Dot Flashing end of styling */
     </style>
       
   </head>
@@ -117,12 +208,17 @@
       
         <div id="menu-bar">
           <div id="location-fetch-header">
-            <div id="load-location" class="loader">
-              
-            </div>
-            <h3 style="padding-left: 15px; padding-top: 2px;">Fetching location...</h3>
-
             
+            <div id="dot-loader" class="dot-container" style="padding-left: 30px;padding-top: 9px;">
+              <div class="dot-flashing"></div>
+            </div>
+            <div id="location-display" class="location-loaded hidden" style="padding:1px">
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-geo" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.3 1.3 0 0 0-.37.265.3.3 0 0 0-.057.09V14l.002.008.016.033a.6.6 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.6.6 0 0 0 .146-.15l.015-.033L12 14v-.004a.3.3 0 0 0-.057-.09 1.3 1.3 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465s-2.462-.172-3.34-.465c-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411"/>
+              </svg> -->
+              <div id="location-text" class="location-loaded" style="padding-left: 40px;"></div>
+            </div>
+
           </div>
           <button class="btn btn-secondary hidden" id="home-button" style="padding: 5px">Back</button>
         </div>
@@ -132,13 +228,17 @@
         
           <div class="card mb-3" role="button" id="emergency-numbers-button">
             <div class="row g-0">
-              <div class="col-md-4">
+              <div class="col-md-4" style="padding:20px">
                 <!-- add container-defining element here -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-hospital" viewBox="0 0 16 16">
+                  <path d="M8.5 5.034v1.1l.953-.55.5.867L9 7l.953.55-.5.866-.953-.55v1.1h-1v-1.1l-.953.55-.5-.866L7 7l-.953-.55.5-.866.953.55v-1.1zM13.25 9a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zM13 11.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm.25 1.75a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zm-11-4a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 3 9.75v-.5A.25.25 0 0 0 2.75 9zm0 2a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zM2 13.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25z"/>
+                  <path d="M5 1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1a1 1 0 0 1 1 1v4h3a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1zm2 14h2v-3H7zm3 0h1V3H5v12h1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1zm0-14H6v1h4zm2 7v7h3V8zm-8 7V8H1v7z"/>
+                </svg>
               </div>
               <div class="col-md-8">
                 <div class="card-body">
                   <h2 class="card-title">Emergency numbers</h2>
-
+                  <h6 class="card-subtitle mb-2 text-muted">Police, fire, and paramedic services</h6>
                 </div>
               </div>
 
@@ -147,12 +247,17 @@
 
           <div class="card mb-3" role="button" id="safety-button">
             <div class="row g-0">
-              <div class="col-md-4">
+              <div class="col-md-4" style="padding: 20px">
                 <!-- add container-defining element here -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-postcard-heart" viewBox="0 0 16 16">
+                  <path d="M8 4.5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0zm3.5.878c1.482-1.42 4.795 1.392 0 4.622-4.795-3.23-1.482-6.043 0-4.622M2.5 5a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/>
+                  <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z"/>
+                </svg>
               </div>
               <div class="col-md-8">
                 <div class="card-body">
                   <h2 class="card-title">General Safety</h2>
+                  <h6 class="card-subtitle mb-2 text-muted">Customs and courtesies to increase safety while traveling</h6>
 
                 </div>
               </div>
@@ -269,6 +374,98 @@
         navigateHome();
       });
 
-      
+
+
+
+      // LOGIC FOR GEOLOCATION!!!!!
+      // structure from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch 
+      document.getElementById("location-text").innerHTML = "<p style=\"font-style: italic;\">Fetching location..."
+        
+      if ("geolocation" in navigator) {
+        /* geolocation is available */
+        navigator.geolocation.getCurrentPosition((position) => {
+          const userLatitude = position.coords.latitude;
+          const userLongitude = position.coords.longitude;
+          console.log("User's Lat & Long: [" + userLatitude + ", " + userLongitude + "]");
+          // getNumbers(userLatitude, userLongitude);
+          responseLoaded(userLatitude, userLongitude);
+          // for now, change class of loaders & location when obtaining coordinates; real implementation will do this after fetching response
+        });
+      } else {
+        /* geolocation IS NOT available, assign defaults of the geographical center of the USA [39.8283° N, 98.5795° W] */
+        const userLatitude = 39.8283;
+        const userLongitude = 98.5795;
+        console.log("Default Lat & Long used (geographical center of the USA): [" + userLatitude + ", " + userLongitude + "]");
+        // getNumbers(userLatitude, userLongitude);
+        responseLoaded(userLatitude, userLongitude);
+      }
+
+      // AI smart call, commented to save tokens (use example response to help format!)
+      //
+      // async function getNumbers(lat, lon) {
+      //   const latLongString = lat + ", " + lon;
+      //   console.log(latLongString);
+      //   const response = await fetch(
+      //     'https://noggin.rea.gent/exceptional-stingray-1544',
+      //     {
+      //       method: 'POST',
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         Authorization: 'Bearer rg_v1_9tkx496eqkm1zwop5h9ss0o28w3qrgo7nb8o_ngk',
+      //       },
+      //       body: JSON.stringify({
+      //         // fill variables here.
+      //         "coordinates": latLongString,
+      //       }),
+      //     }
+      //   ).then(response => response.text());
+      //   console.log(response);
+      //   }
+
+      // response to first working call = 
+          //{
+          //   "location": {
+          //     "city": "Oakland",
+          //     "state": "California",
+          //     "country": "United States"
+          //   },
+          //   "emergency_numbers": {
+          //     "police": "911",
+          //     "fire_department": "911",
+          //     "emergency_services": "911"
+          //   },
+          //   "nearest_embassy": {
+          //     "address": "U.S. Consulate General, 1 Sansome Street, Suite 850, San Francisco, CA 94104"
+          //   }
+          // }
+          // 
+
+          const exampleResponse = {
+              "location": {
+                "city": "Oakland",
+                "state": "California",
+                "country": "United States"
+              },
+              "emergency_numbers": {
+                "police": "911",
+                "fire_department": "911",
+                "emergency_services": "911"
+              },
+              "nearest_embassy": {
+                "address": "U.S. Consulate General, 1 Sansome Street, Suite 850, San Francisco, CA 94104"
+              }
+            };
+          console.log(exampleResponse);
+
+          function responseLoaded(lat, long) { // leave room for real response var in func
+            console.log("called responseLoaded");
+            document.getElementById("dot-loader").classList.add("hidden");
+            document.getElementById("location-display").classList.remove("hidden");
+
+            // document.getElementById("h").classList.add("hidden");
+            document.getElementById("location-display").innerHTML = "<p>" + exampleResponse.location.city + ", " + exampleResponse.location.state;
+
+          }
+          
   </script>
 </html>

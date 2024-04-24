@@ -19,23 +19,98 @@
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:wght@100..900"
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:wght@100..900&family=Varela+Round"
     rel="stylesheet">
 
    <style>
-    h1 {
-     font-family: "Cabin";
+    main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #531A2E;
     }
+
+    section {
+        display: flex;
+
+    }
+
+    section > h3 {
+        font-family: 'Varela Round';
+        color: #f0f0f0;
+        font-size: 9.5vw;
+        cursor: default; /* to keep the cursor the same */
+        opacity: 0;
+      animation: fadeIn 1s ease-in both;
+    }
+    button {
+        font-family: "Cabin";
+        color: #f0f0f0;
+        font-size: 3vw;
+      animation: fadeIn 1.5s ease-in both;
+    }
+
+
+    /* animate each letter individually */
+
+    section h3:first-child {
+      animation-delay: 0.2s;
+    }
+    /* section h3:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+    section h3:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    section h3:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+    section h3:nth-child(5) {
+      animation-delay: 1.0s;
+    }
+    section h3:nth-child(6) {
+      animation-delay: 1.2s;
+    }
+    section h3:nth-child(7) {
+      animation-delay: 1.4s;
+    }
+    section h3:nth-child(8) {
+      animation-delay: 1.6s;
+    }
+    section h3:nth-child(9) {
+      animation-delay: 1.8s;
+    }
+    section h3:nth-child(10) {
+      animation-delay: 2.0s;
+    } */
+
+    
+    
+
+    /* Keyframe for animation  
+    *  https://codepen.io/michaelirvine/pen/ddPERr 
+    */
+
+    @keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -20%, 0);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
     </style>
+
+    
   </head>
 
   <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
   <body style="font-family: Arial">
-    <header
-      style="background-color: #FBD0DE; padding: 15px; text-align: center"
-    >
-    <h1>WANDERELLA</h1>
-    </header>
 
     <div class="site-view">
       <nav>
@@ -65,10 +140,10 @@
       </nav>
 
       <main>
-        <h2>Welcome!</h2>
-        <p>
-          Landing page, click the nav bar and go somewhere else... 
-        </p>
+        <section>
+          <h3>WANDERELLA</h3>
+        </section>
+        <a href="/dashboard.html"><button id="start" type="button" class="btn btn-outline-light" style="animation-delay: 2s;">Let's get started</button></a>
       </main>
     </div>
 
@@ -94,5 +169,7 @@
         navLink.classList.add('active');
       }
     });
+
+
   </script>
 </html>

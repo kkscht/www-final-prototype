@@ -17,9 +17,20 @@ body {
 .site-view {
   /* This lets us arrange the child elements of the main view in a row. */
   display: flex;
-  flex-direction: row;
-
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
 }
+
+/*
+  ////////////////////////////////////////////////////////////////////////////////////
+  ************************************************************************************
+
+  NAV BAR STYLING
+
+  ************************************************************************************
+  ////////////////////////////////////////////////////////////////////////////////////
+*/
 
 nav {
   /* The `flex` attribute controls the width of the column *relative* to other columns. */
@@ -31,6 +42,7 @@ nav {
   width: 100%;
   background-color: #F0F0F0;
   text-align: center;
+  z-index: 1;
 }
 
 /* Style all link tags within nav elements */
@@ -51,22 +63,6 @@ nav a i {
   color: inherit; 
 }
 
-/* Default style for nav links
-.nav-link {
-  top: 50%;
-  display: block;
-  width: 100%;
-  color: #8b8b8b;
-}
-
-/* Default style for nav link icons */
-/* .nav-link i {
-  font-size: 32px;
-  position: absolute;
-  top: -30px;
-  color: inherit;
-} */ 
-
 /* Style for active nav link */
 nav a.active {
   color: #F16291;
@@ -76,6 +72,79 @@ nav a.active {
 nav a.active i {
   color: #F16291;
 }
+
+/*
+  ////////////////////////////////////////////////////////////////////////////////////
+  ************************************************************************************
+
+  MAP SECTION STYLING
+
+  ************************************************************************************
+  ////////////////////////////////////////////////////////////////////////////////////
+*/
+
+/* Style for Google Map API Container, sized to fit above nav bar*/
+.map-container {
+  flex: 1; /* Make the map container expand to fill remaining space */
+  position: absolute; /* Position absolutely within the site-view container */
+  top: 0; /* Position at the top of the site-view container */
+  left: 0; /* Position at the left of the site-view container */
+  width: 100%; /* Occupy full width */
+  height: calc(100% - 35px); /* Subtract the height of the nav bar */
+  z-index: 0; /* Ensure the map stays below the nav bar */
+}
+
+/* Style for Google Map API */
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Style for all map buttons */
+.map-buttons {
+  position: absolute; /* Position the custom buttons relative to the map */
+  top: 20px; /* Adjust top position as needed */
+  right: 15px; /* Adjust right position as needed */
+  z-index: 1; /* Ensure buttons are above the map */
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: flex-end; /* Align buttons to the right */
+}
+
+/* Style for each individual map button */
+.map-button {
+  background-color: #FBD0DE;
+  border: 1px solid #ccc;
+  filter: drop-shadow(0px 2px rgb(159, 159, 159));
+  border-radius: 50%; 
+  width: 50px;
+  height: 50px; 
+  padding: 0; 
+  margin-bottom: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for each individual map button's symbol */
+.map-button i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 30px;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+  ////////////////////////////////////////////////////////////////////////////////////
+
+  END OF MAP SECTION STYLING
+
+  ////////////////////////////////////////////////////////////////////////////////////
+*/
 
 /* Makes sure affected elements don't exceed the bounds of their container. */
 /* Handy for images! */
@@ -99,6 +168,80 @@ main {
   padding: 0 20px;
 
 }
+
+/* A spinning wheel for async functions */
+.loader {
+  margin: auto;
+  border: 5px solid #EAF0F6;
+  border-radius: 50%;
+  border-top: 5px solid #E91E63;
+  width: 30px;
+  height: 30px;
+  animation: spinner 2s linear infinite;
+}
+@keyframes spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/**
+* ==============================================
+* Dot Flashing
+* Credits: https://codepen.io/nzbin/pen/GGrXbp 
+* ==============================================
+*/
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #E91E63;
+  color: #E91E63;
+  animation: dot-flashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+  
+}
+
+.dot-flashing::before, .dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+
+}
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #E91E63;
+  color: #E91E63;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 0s;
+
+}
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #E91E63;
+  color: #E91E63;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 1s;
+
+}
+
+@keyframes dot-flashing {
+  0% {
+    background-color: #E91E63;
+  }
+  50%, 100% {
+    background-color: rgba(255, 128, 215, 0.2);
+  }
+}
+/* Dot Flashing end of styling */
+
 
 
 footer {
@@ -295,8 +438,6 @@ p {
   margin-top: 10px;
   font-size: 1em;
 }
-
-
 
 .profile-form {
   height: 400px;

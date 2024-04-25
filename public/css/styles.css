@@ -450,7 +450,6 @@ p {
   border-radius: 8px;
   width: 90%;
   border: 1.5px solid black;
-
 }
 
 .form-group {
@@ -490,6 +489,7 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: center; 
+  align-content: center;
   
 }
 
@@ -539,4 +539,8 @@ textarea {
   width: 100%;      
   justify-content: space-evenly;
   height: 100%;
+}
+
+.edit {
+  padding-top: 1mm;
 }

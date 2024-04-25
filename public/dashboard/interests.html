@@ -112,7 +112,7 @@
             <div class="custom-scroll">
   
         <div class="tags">
-            <button type="button" class="tag-btn">Other <img class="edit" src="/images/edit.png"></button>
+            <button type="button" class="tag-btn" id="">Other <img class="edit" src="/images/edit.png"></button>
             <button type="button" class="tag-btn">Cooking</button>
             <button type="button" class="tag-btn">Baking</button>
             <button type="button" class="tag-btn">Reading</button>
@@ -142,24 +142,61 @@
 
    
       <script>
-     
      document.addEventListener('DOMContentLoaded', function() {
       var tags = document.querySelectorAll('.tag-btn');
       tags.forEach(function(tag) {
         tag.addEventListener('click', function(event) {
           event.target.classList.toggle('selected');
-          // You can add more actions here for when a tag is clicked.
         });
       });
     });
       </script>
 
 
+      <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var tags = document.querySelectorAll('.tag-btn');
+            var form = document.getElementById('profile-form');
+
+            // Restore the selected state from localStorage
+            var selectedInterests = JSON.parse(localStorage.getItem('selectedInterests')) || [];
+         
+            var tags = document.querySelectorAll('.tag-btn'); 
+            tags.forEach(function(tag) {
+                if (selectedInterests.includes(tag.textContent.trim())) {
+                    tag.classList.add('selected'); 
+                }
+            });
+    
+        
+            // Listen for form submission to save the state of the buttons
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent actual form submission to the server
+                var selectedInterests = [];
+                tags.forEach(function(tag) {
+                    var tagId = tag.textContent.trim().toLowerCase()
+                    tagId = tagId.replace(/\s/g, '-');
+                    if (tag.classList.contains('selected')) {
+                        selectedInterests.push(tag.textContent.trim());
+                        localStorage.setItem('selectedInterests', JSON.stringify(selectedInterests));
+                    }
+                   
+                });
+                alert("Interests updated!");
+            });
+        });
+
+      </script>
+
+  
+
+
+     
 
 
        
 
-      <script src="script.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
   </body>

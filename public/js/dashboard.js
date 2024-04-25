@@ -15,7 +15,10 @@ navLinks.forEach(function(navLink) {
 
 
 
+
 window.onload = () => {
+
+    
 
     
 
@@ -27,6 +30,7 @@ window.onload = () => {
     const hobbies = localStorage.getItem('hobbies');
     const interests = localStorage.getItem('interests');
     const profilePicture = localStorage.getItem('profilePicture');
+    const other = localStorage.getItem('other');
     
 
     if (profilePicture) {
@@ -37,6 +41,7 @@ window.onload = () => {
         document.getElementById('full-name').innerHTML = firstName;
     }
     if (lastName) {
+ 
         document.getElementById('full-name').innerHTML += ' ' + lastName;
     }
     // if (phoneNumber) {
@@ -48,12 +53,7 @@ window.onload = () => {
     if (bio) {
         document.getElementById('bio').innerHTML = bio;
     }
-    if (hobbies) {
-        document.getElementById('hobbies').innerHTML = hobbies;
-    }
-    if (interests) {
-        document.getElementById('interests').innerHTML = interests;
-    }
+
   };
 
 

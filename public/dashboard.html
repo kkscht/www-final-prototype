@@ -140,6 +140,24 @@
 
 
     </div>
+    <script>
+
+          var selectedInterests = JSON.parse(localStorage.getItem('selectedInterests')) || [];
+      
+          var interestsContainter = document.querySelector('.interests .tags');
+      
+          interestsContainter.innerHTML = '';
+      
+          selectedInterests.forEach(function(tagValue) {
+              var tagSpan = document.createElement('span');
+              tagSpan.textContent = tagValue;
+              interestsContainter.appendChild(tagSpan);
+          });
+      
+    
+ 
+      </script>
+
     <script src="js/dashboard.js"></script>
   </body>
 

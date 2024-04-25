@@ -43,6 +43,8 @@ nav {
   background-color: #F0F0F0;
   text-align: center;
   z-index: 1;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+
 }
 
 /* Style all link tags within nav elements */
@@ -310,7 +312,7 @@ footer {
     width: 110px;
     height: 110px;
     border-radius: 50%;
-    background: #E91E63;
+    border: 1.5px solid #E91E63;
 
   }
   
@@ -341,26 +343,25 @@ footer {
     background: #FBD0DE;
     border: 1.5px solid black;
     border-radius: 20px;
-    padding: 5px 10px;
+    padding: 0px 10px;
     margin-top: 20px;
     font-size: 10px;
     color: black;
     cursor: pointer;
     outline: none;
     height: 400px;
-
-    
   }
 
 h5 {
   text-align: left;
   margin-bottom: 3px;
-  margin-top: 10px;
+
 }
 
 .content {
     height: 100%;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     width: 95%;
     float: left;
 }
@@ -399,8 +400,7 @@ p {
   height: 95%;
   overflow-y: scroll;
   margin: 1em auto;
-  scroll-margin-right: 20px;
-  
+  padding-right: 10px;
 }
 /* Demonstrate a "mostly customized" scrollbar
  * (won't be visible otherwise if width/height is specified) */
@@ -409,17 +409,16 @@ p {
   height: 90%;
   width: 20px;
   float: right;
-  right: 10;
-  top: 10px;
-  bottom: 10px;
-  scroll-margin-right: 20px;
 
 }
 
 /* Add a thumb */
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: black;
-  height: 2em;
+
+  background-color: white;
+  border: 3.5px solid transparent;
+  border-radius: 9px;
+  background-clip: content-box;
 }
 
 
@@ -456,14 +455,18 @@ p {
 }
 
 .profile-form {
-  height: 400px;
-  background-color: #fff;
+  display: flex;
+
+  height: 500px;
+  background-color: #FBD0DE;
   margin: 20px auto;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  width: 80%;
-  
+  width: 90%;
+  border: 1.5px solid black;
+
 }
 
 .form-group {
@@ -499,46 +502,41 @@ textarea {
   margin-right: 5px;
 }
 
-.update-button {
-  background-color: #e91e63;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-transform: uppercase;
+.edit-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  
+}
 
-  align-self: center;
-  margin-top: 25px;
-   
+.update-button {
+  display: flex;
+  justify-content: center;
+  background-color: #E91E63;
+  color: #fff;
+  padding: 5px 70px;
+  border-radius: 10px;
+  cursor: pointer;   
 }
 
 .update-button:hover {
   background-color: #c2185b;
 }
 
-.card {
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-}
+
 
 .profile-name-input {
   margin-bottom: 16px;
 }
 
-.profile-card {
-  margin-top: 15px;
-  max-width: 400px;
-  display: flex;
-  flex-direction: row;
-}
+
 
 .profile-pic {
-  width: 100px;
-  height: 100px;
-  border-radius: 6px;
-  margin: 12px auto;
-
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 1.5px solid #E91E63;
+  margin-top: 15px;
 }
 
 .content-container {
@@ -547,6 +545,7 @@ textarea {
   align-items: center;     
   width: 100%;      
   justify-content: space-evenly;
+  height: 100%;
 }
 
 .screen-container {
@@ -555,4 +554,5 @@ textarea {
   align-items: center;     
   width: 100%;      
   justify-content: space-evenly;
+  height: 100%;
 }

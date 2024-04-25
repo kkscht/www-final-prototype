@@ -11,3 +11,21 @@ navLinks.forEach(function(navLink) {
     navLink.classList.add('active');
     }
 });
+
+
+
+
+
+window.onload = () => {
+       
+    const profilePicture = localStorage.getItem('profilePicture');
+    if (profilePicture) {
+      document.querySelector('.profile-pic').src = profilePicture;
+    }
+  };
+
+
+
+
+    
+

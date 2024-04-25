@@ -26,6 +26,7 @@
     h1 {
      font-family: "Cabin";
     }
+    p {}
     </style>
   </head>
 
@@ -106,20 +107,17 @@
                       <span>Arabic</span>
                   </div>
               </section>
-              <section class="hobbies">
-                  <h5>Hobbies</h5>
-                  <div class="tags">
-                      <span>Lorem</span>
-                      <span>Lorem ipsum dolor</span>
-                  </div>
-              </section>
               <section class="interests">
                   <h5>Interests</h5>
                   <div class="tags">
                       <span>Lorem</span>
-                      <span>Lorem ipsum dolor</span>
+                    
+                  </div>
+              </section>
+              <section class="travel-style">
+                  <h5>Travel Style</h5>
+                  <div class="tags">
                       <span>Lorem</span>
-                      <span>Lorem ipsum dolor sit amet</span>
                   </div>
               </section>
          
@@ -141,22 +139,37 @@
 
     </div>
     <script>
-
           var selectedInterests = JSON.parse(localStorage.getItem('selectedInterests')) || [];
-      
-          var interestsContainter = document.querySelector('.interests .tags');
-      
-          interestsContainter.innerHTML = '';
-      
+          var interestsContainer = document.querySelector('.interests .tags');
+          interestsContainer.innerHTML = '';
           selectedInterests.forEach(function(tagValue) {
               var tagSpan = document.createElement('span');
               tagSpan.textContent = tagValue;
-              interestsContainter.appendChild(tagSpan);
+              interestsContainer.appendChild(tagSpan);
           });
-      
-    
- 
       </script>
+
+<script>
+  var selectedLanguages = JSON.parse(localStorage.getItem('selectedLanguages')) || [];
+  var languagesContainer = document.querySelector('.languages .tags');
+  languagesContainer.innerHTML = '';
+  selectedLanguages.forEach(function(tagValue) {
+      var tagSpan = document.createElement('span');
+      tagSpan.textContent = tagValue;
+      languagesContainer.appendChild(tagSpan);
+  });
+</script>
+
+<script>
+  var selectedTravelStyle = JSON.parse(localStorage.getItem('selectedTravelStyle')) || [];
+  var travelStyleContainer = document.querySelector('.travel-style .tags');
+  travelStyleContainer.innerHTML = '';
+  selectedTravelStyle.forEach(function(tagValue) {
+      var tagSpan = document.createElement('span');
+      tagSpan.textContent = tagValue;
+      travelStyleContainer.appendChild(tagSpan);
+  });
+</script>
 
     <script src="js/dashboard.js"></script>
   </body>

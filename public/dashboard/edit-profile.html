@@ -131,7 +131,7 @@
       <textarea id="bio" name="bio" placeholder="Your bio..."></textarea>
     </div>
     <div class="form-group">
-      <label>Languages <a href="interests.html"><img class="edit" src="/images/edit.png"></a> </label>
+      <label>Languages <a href="languages.html"><img class="edit" src="/images/edit.png"></a> </label>
       <div class="checkbox-group">
         <input type="checkbox" id="english" name="language_english">
         <label for="english">English</label>
@@ -140,12 +140,12 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="hobbies">Hobbies <a href="interests.html"><img class="edit" src="/images/edit.png"></a></label>
-      <textarea id="hobbies" name="hobbies" placeholder="Your hobbies..."></textarea>
-    </div>
-    <div class="form-group">
       <label for="interests">Interests <a href="interests.html"><img class="edit" src="/images/edit.png"></a></label>
       <textarea id="interests" name="interests" placeholder="Your interests..."></textarea>
+    </div>
+    <div class="form-group">
+      <label for="travel-style">Travel Style <a href="travel-style.html"><img class="edit" src="/images/edit.png"></a></label>
+      <textarea id="travel-style" name="travel-style" placeholder="Your travel style..."></textarea>
     </div>
   </div>
   </div>
@@ -222,9 +222,6 @@
         }
         if (bio) {
             document.getElementById('bio').value = bio;
-        }
-        if (hobbies) {
-            document.getElementById('hobbies').value = hobbies;
         }
         if (interests) {
             document.getElementById('interests').value = interests;

@@ -27,7 +27,6 @@ window.onload = () => {
     const phoneNumber = localStorage.getItem('phoneNumber');
     const travelInformation = localStorage.getItem('travelInformation');
     const bio = localStorage.getItem('bio');
-    const hobbies = localStorage.getItem('hobbies');
     const interests = localStorage.getItem('interests');
     const profilePicture = localStorage.getItem('profilePicture');
     const other = localStorage.getItem('other');

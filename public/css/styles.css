@@ -140,6 +140,22 @@ nav a.active i {
   height: 100%;
 }
 
+.search-bar {
+  margin-top: 20px; /* Adjust the margin from the top of the screen */
+  z-index: 1;
+}
+
+.search-bar input[type="text"] {
+  border-radius: 50px; /* Adjust the border-radius to make it rounded */
+  border-color: #c8c8c8; /* Optional: Adjust border color */
+  margin-top: 5px; /* Adjust the margin from the top of the container */
+}
+
+.search-bar input[type="text"]:focus {
+  border-color: #f16291; /* Optional: Adjust border color on focus */
+  box-shadow: none; /* Optional: Remove any box shadow on focus */
+}
+
 /*
   ////////////////////////////////////////////////////////////////////////////////////
 

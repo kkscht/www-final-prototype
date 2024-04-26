@@ -34,67 +34,10 @@
   <!-- you can also specify styles straight in html! Let's use Courier New and brown text on this page.-->
   <body style="font-family: Arial; color: #14130f">
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <!-- Map container -->
-          <div class="map-container">
-            <div id="map"></div>
-            <nav>
-              <a href="/na-current" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-                <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599"/>
-              </svg><br>Current Trip</a>
-              <a href="/map" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
-                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-              </svg><br>Map</a>
-              <a href="/na" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-globe-americas" viewBox="0 0 16 16">
-                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/>
-              </svg><br>Discover</a>
-              <a href="/safety" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-medical" viewBox="0 0 16 16">
-                <path d="M8.5 4.5a.5.5 0 0 0-1 0v.634l-.549-.317a.5.5 0 1 0-.5.866L7 6l-.549.317a.5.5 0 1 0 .5.866l.549-.317V7.5a.5.5 0 1 0 1 0v-.634l.549.317a.5.5 0 1 0 .5-.866L9 6l.549-.317a.5.5 0 1 0-.5-.866l-.549.317zM5.5 9a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/>
-                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
-              </svg><br>Safety</a>
-              <a href="/dashboard" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"></path>
-              </svg></i><br>Dashboard</a>
-            </nav>
-            <div class="row">
-              <div class="col">
-                <!-- Top row with search bar and top button -->
-                <div class="search-bar">
-                  <input type="text" placeholder="Search location or select on map" aria-label="Search">
-                </div>
-                <div class="map-buttons">
-                  <button class="map-button" aria-label="Search"><i class="bi bi-search"></i></button>
-                  <button class="map-button" aria-label="Add"><i class="bi bi-plus-lg"></i></button>
-                  <button class="map-button" aria-label="Warning"><i class="bi bi-exclamation-triangle"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="site-view">
-
-      <!-- <div class="search-bar">
-        <input type="text" placeholder="Search location or select on map" aria-label="Search">
-      </div>
-
-      <div class="map-container">
-        <div id="map"></div>
-      </div>
-
-      <div class="map-buttons">
-        <button class="map-button" aria-label="Search"><i class="bi bi-search"></i></button>
-        <button class="map-button" aria-label="Add"><i class="bi bi-plus-lg"></i></button>
-        <button class="map-button" aria-label="Warning"><i class="bi bi-exclamation-triangle"></i></button>
-      </div> -->
-
-      <!-- <nav>
-
+      <!-- Navigation Bar -->
+      <nav>
         <a href="/na-current" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
           <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599"/>
         </svg><br>Current Trip</a>
@@ -112,65 +55,153 @@
         <a href="/dashboard" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
           <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"></path>
         </svg></i><br>Dashboard</a>
-      </nav> -->
+      </nav>
+
+      <!-- Map Container -->
+      <div class="map-container">
+        <!-- Map -->
+        <div id="map"></div>
+        <!-- Buttons -->
+        <div class="map-buttons">
+          <button class="map-button" id="searchButton" aria-label="Search"><i class="bi bi-search"></i></button>
+          <button class="map-button" aria-label="Add"><i class="bi bi-plus-lg"></i></button>
+          <button class="map-button" aria-label="Warning"><i class="bi bi-exclamation-triangle"></i></button>
+        </div>
+        <!-- Search Bar (initially hidden) -->
+        <div class="search-bar search-bar-hidden" id="searchBar">
+          <input type="text" id="searchInput" placeholder="Search location or select on map" aria-label="Search">
+        </div>
+      </div>
 
     </div>
-  </body>
 
-  <!-- Google Maps API Import -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr7TfjKOJDd-_u7gMjc4grL9WVC4F3TvI&callback=initMap" async defer></script>
-  
-  <script>
-    // Get the current page URL
-    var currentPageUrl = window.location.href;
-
-    // Get all nav links
-    var navLinks = document.querySelectorAll('nav a');
-
-    // Loop through each nav link
-    navLinks.forEach(function(navLink) {
-      // Check if the href attribute of the nav link matches the current page URL
-      if (navLink.href === currentPageUrl) {
-        // If it matches, add the 'active' class to the nav link
-        navLink.classList.add('active');
-      }
-    });
-
-    function initMap() {
-
-      // Initialize map with default location (Metropolitan Museum of Art)
-      var defaultLocation = { lat: 37.8719, lng: -122.2585 }; // Metropolitan Museum of Art coordinates
-      var map = new google.maps.Map(document.getElementById('map'), {
-          center: defaultLocation,
-          zoom: 15,
-          disableDefaultUI: true
+      <!-- Google Maps API Import -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr7TfjKOJDd-_u7gMjc4grL9WVC4F3TvI&libraries=places&callback=initMap" async defer></script>
+    
+    <script>
+      // Make the nav bar link pink when it is active
+      var currentPageUrl = window.location.href;
+      var navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(function(navLink) {
+        if (navLink.href === currentPageUrl) {
+          navLink.classList.add('active');
+        }
       });
 
-      // Try HTML5 geolocation to get the user's current position
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-              var userLocation = {
-                  lat: position.coords.latitude,
-                  lng: position.coords.longitude
-              };
-              map.setCenter(userLocation);
-          }, function() {
-              handleLocationError(true, map.getCenter());
-          });
-      } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, map.getCenter());
-      }
-    }
+      // Initialize the Google Map API
+      async function initMap() {
 
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        // Initialize map with default location (Metropolitan Museum of Art)
+        var defaultLocation = { lat: 37.8719, lng: -122.2585 }; // Metropolitan Museum of Art coordinates
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: defaultLocation,
+            zoom: 15,
+            disableDefaultUI: true
+        });
+
+        // Try HTML5 geolocation to get the user's current position
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                // Create a marker for the user's current location
+                var marker = new google.maps.Marker({
+                  position: userLocation,
+                  map: map,
+                  title: 'Your Location'
+                });
+                map.setCenter(userLocation);
+            }, function() {
+                handleLocationError(true, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, map.getCenter());
+        }
+
+        // Initialize Places Autocomplete service
+        var input = document.getElementById('searchInput');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        // Handle place selection
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            // Place details not found for the input, handle accordingly
+            console.error("No details available for input: ", input.value);
+            return;
+          }
+
+          // If the place has a geometry, navigate the map to it
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Set a default zoom level
+          }
+          // Search for places based on the user's input query
+          var request = {
+              location: map.getCenter(),
+              radius: '5000', // Adjust the radius as needed
+              query: place.name // Use the name of the place as the search query
+          };
+
+          var service = new google.maps.places.PlacesService(map);
+          service.textSearch(request, function(results, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+              // Clear existing markers
+              markers.forEach(function(marker) {
+                  marker.setMap(null);
+              });
+              markers = [];
+
+              // Create markers for each place
+              for (var i = 0; i < results.length; i++) {
+                  createMarker(results[i]);
+              }
+            }
+          });
+        });
+      }
+
+      // Function to create a marker for a place
+      function createMarker(place) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+          title: place.name
+        });
+        markers.push(marker);
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         // Handle errors when getting user's location
         // You can customize this function to display an error message
         // or perform other actions
         console.error("Error: The Geolocation service failed.");
-    }
+      }
 
-    initMap();
+      initMap();
 
-  </script>
+      // Get references to the search button and search bar
+      var searchButton = document.getElementById('searchButton');
+      var searchBar = document.getElementById('searchBar');
+
+      // Add event listener to the search button
+      searchButton.addEventListener('click', function() {
+        document.getElementById('searchInput').value = '';
+        // Toggle the visibility of the search bar
+        searchBar.classList.toggle('search-bar-visible');
+        if (searchBar.classList.contains('search-bar-visible')) {
+          searchButton.style.backgroundColor = "#f16291";
+        } else {
+          searchButton.style.backgroundColor = "#fbd0de";
+        }
+      });
+
+    </script>
+  </body>
 </html>

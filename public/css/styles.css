@@ -92,7 +92,7 @@ nav a.active i {
   top: 0; /* Position at the top of the site-view container */
   left: 0; /* Position at the left of the site-view container */
   width: 100%; /* Occupy full width */
-  height: calc(100% - 35px); /* Subtract the height of the nav bar */
+  height: 100vh; /* Subtract the height of the nav bar */
   z-index: 0; /* Ensure the map stays below the nav bar */
 }
 
@@ -140,20 +140,33 @@ nav a.active i {
   height: 100%;
 }
 
+/* Style for search bar */
 .search-bar {
-  margin-top: 20px; /* Adjust the margin from the top of the screen */
-  z-index: 1;
+  position: absolute; /* Position the custom buttons relative to the map */
+  top: 20px; /* Adjust top position as needed */
+  left: 15px; /* Adjust right position as needed */
+  z-index: 1; /* Ensure buttons are above the map */
+  align-items: flex-start; /* Align buttons to the right */
 }
 
+.search-bar-hidden {
+  display: none;
+}
+
+.search-bar-visible {
+  display: block;
+}
+
+/* Style for search bar input*/
 .search-bar input[type="text"] {
   border-radius: 50px; /* Adjust the border-radius to make it rounded */
-  border-color: #c8c8c8; /* Optional: Adjust border color */
+  border-color: #b6b6b6; /* Optional: Adjust border color */
   margin-top: 5px; /* Adjust the margin from the top of the container */
+  width: 77vw;
 }
 
 .search-bar input[type="text"]:focus {
   border-color: #f16291; /* Optional: Adjust border color on focus */
-  box-shadow: none; /* Optional: Remove any box shadow on focus */
 }
 
 /*

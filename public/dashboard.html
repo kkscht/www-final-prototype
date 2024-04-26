@@ -26,6 +26,7 @@
     h1 {
      font-family: "Cabin";
     }
+    p {}
     </style>
   </head>
 
@@ -73,7 +74,7 @@
             <div class="avatar-container">
               <img class="profile-pic" src="/images/default_avatar.png" alt="Avatar">
             </div>
-            <h4 class="name">FirstName LastName</h4>
+            <h4 class="name" id="full-name">FirstName LastName</h4>
           </div>
           <div class="menu">
         
@@ -91,58 +92,32 @@
             <div class="content" id="content">
               <section class="travel-info">
                   <h5>Travel Information</h5>
-                  <p>
+                  <p id="travel-information">
                       hi
                   </p>
               </section>
               <section class="bio">
-                  <h5>Bio</h5>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
-                  <p>Ut enim ad minim veniam</p>
+                  <h5 class="bio">Bio</h5>
+                  <p id="bio">Ut enim ad minim veniam</p>
               </section>
               <section class="languages">
-                  <h5>Languages</h5>
+                  <h5>Languages </h5>
                   <div class="tags">
                       <span>English</span>
                       <span>Arabic</span>
-                  </div>
-              </section>
-              <section class="hobbies">
-                  <h5>Hobbies</h5>
-                  <div class="tags">
-                      <span>Lorem</span>
-                      <span>Lorem ipsum dolor</span>
                   </div>
               </section>
               <section class="interests">
                   <h5>Interests</h5>
                   <div class="tags">
                       <span>Lorem</span>
-                      <span>Lorem ipsum dolor</span>
+                    
+                  </div>
+              </section>
+              <section class="travel-style">
+                  <h5>Travel Style</h5>
+                  <div class="tags">
                       <span>Lorem</span>
-                      <span>Lorem ipsum dolor sit amet</span>
                   </div>
               </section>
          
@@ -163,6 +138,39 @@
 
 
     </div>
+    <script>
+          var selectedInterests = JSON.parse(localStorage.getItem('selectedInterests')) || [];
+          var interestsContainer = document.querySelector('.interests .tags');
+          interestsContainer.innerHTML = '';
+          selectedInterests.forEach(function(tagValue) {
+              var tagSpan = document.createElement('span');
+              tagSpan.textContent = tagValue;
+              interestsContainer.appendChild(tagSpan);
+          });
+      </script>
+
+<script>
+  var selectedLanguages = JSON.parse(localStorage.getItem('selectedLanguages')) || [];
+  var languagesContainer = document.querySelector('.languages .tags');
+  languagesContainer.innerHTML = '';
+  selectedLanguages.forEach(function(tagValue) {
+      var tagSpan = document.createElement('span');
+      tagSpan.textContent = tagValue;
+      languagesContainer.appendChild(tagSpan);
+  });
+</script>
+
+<script>
+  var selectedTravelStyle = JSON.parse(localStorage.getItem('selectedTravelStyle')) || [];
+  var travelStyleContainer = document.querySelector('.travel-style .tags');
+  travelStyleContainer.innerHTML = '';
+  selectedTravelStyle.forEach(function(tagValue) {
+      var tagSpan = document.createElement('span');
+      tagSpan.textContent = tagValue;
+      travelStyleContainer.appendChild(tagSpan);
+  });
+</script>
+
     <script src="js/dashboard.js"></script>
   </body>
 

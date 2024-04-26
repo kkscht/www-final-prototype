@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- let's import our stylesheet (found in public/css/styles.css)-->
+  
+    <!-- Bootstrap -->
+
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+ 
+    <!-- Our style sheet -->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:wght@100..900"
+    rel="stylesheet">
+
+   <style>
+    h1 {
+     font-family: "Arial Black";
+     text-align: left;
+     color: #E91E63;
+     -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    }
+    .tags {
+        margin: 15px;
+    }
+    .tags span {
+        background: none;
+        border: 2px solid #E91E63;
+        border-radius: 30px;
+        padding: 4px 10px;
+        margin: 3px;
+
+        font-size: 18px;
+        color: black;
+        cursor: pointer;
+        outline: none;
+        }
+        .profile-form {
+            background-color: white;
+            border-width: 0px;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        }
+        /* Tags container */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+}
+
+/* Button that looks like a tag */
+.tag-btn {
+    background: none;
+        border: 2px solid #E91E63;
+        border-radius: 30px;
+        padding: 4px 10px;
+        margin: 3px;
+
+        font-size: 18px;
+        color: black;
+        cursor: pointer;
+        outline: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover state for the tag */
+.tag-btn:hover {
+  background-color: #E91E63;
+  color: #FFF;
+}
+
+/* Selected state for the tag */
+.tag-btn.selected {
+  background-color: #E91E63;
+  color: #FFF;
+}
+    </style>
+  </head>
+
+  <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
+  <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
+    <header
+      style="background-color: #FBD0DE; padding: 15px; text-align: center"
+    >
+    
+
+    
+      <div class="navbar">
+        <h1>Languages</h1> <a href="edit-profile.html" class="back-button">&larr; Back</a>
+        <div><p>Let everyone know what what languages you can speak!</p></div>
+       
+      </div>
+    </header>
+
+ 
+   
+
+      
+
+   
+      <div class="content-container">
+        <div class="edit-info">
+            <form id="profile-form"> 
+        <div class="profile-form">
+            <div class="custom-scroll">
+  
+        <div class="tags">
+            <button type="button" class="tag-btn" id="">Other <img class="edit" src="/images/edit.png"></button>
+            <button type="button" class="tag-btn">English</button>
+            <button type="button" class="tag-btn">French</button>
+            <button type="button" class="tag-btn">Spanish</button>
+            <button type="button" class="tag-btn">Mandarin</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        <button id="submit" type="submit" class="update-button">Update</button>
+    </form>
+
+
+
+   
+      <script>
+     document.addEventListener('DOMContentLoaded', function() {
+      var tags = document.querySelectorAll('.tag-btn');
+      tags.forEach(function(tag) {
+        tag.addEventListener('click', function(event) {
+          event.target.classList.toggle('selected');
+        });
+      });
+    });
+      </script>
+
+
+      <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var tags = document.querySelectorAll('.tag-btn');
+            var form = document.getElementById('profile-form');
+
+            // Restore the selected state from localStorage
+            var selectedLanguages = JSON.parse(localStorage.getItem('selectedLanguages')) || [];
+         
+            var tags = document.querySelectorAll('.tag-btn'); 
+            tags.forEach(function(tag) {
+                if (selectedLanguages.includes(tag.textContent.trim())) {
+                    tag.classList.add('selected'); 
+                }
+            });
+    
+        
+            // Listen for form submission to save the state of the buttons
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent actual form submission to the server
+                var selectedLanguages = [];
+                tags.forEach(function(tag) {
+                    var tagId = tag.textContent.trim().toLowerCase()
+                    tagId = tagId.replace(/\s/g, '-');
+                    if (tag.classList.contains('selected')) {
+                        selectedLanguages.push(tag.textContent.trim());
+                        localStorage.setItem('selectedLanguages', JSON.stringify(selectedLanguages));
+                    }
+                   
+                });
+                alert("Languages updated!");
+            });
+        });
+
+      </script>
+
+  
+
+
+     
+
+
+       
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+ 
+
+</html>

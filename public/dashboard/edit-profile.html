@@ -122,11 +122,16 @@
       <input type="tel" id="phone-number" name="phone_number" placeholder="+ 123 456 7890">
     </div>
     <div class="form-group">
+      <label for="travel-information">Travel Information</label>
+      <textarea id="travel-information" name="travel-information" placeholder="Your travel information..."></textarea>
+    </div>
+    <div class="form-group">
+    <div class="form-group">
       <label for="bio">Bio</label>
       <textarea id="bio" name="bio" placeholder="Your bio..."></textarea>
     </div>
     <div class="form-group">
-      <label>Languages</label>
+      <label>Languages <a href="languages.html"><img class="edit" src="/images/edit.png"></a> </label>
       <div class="checkbox-group">
         <input type="checkbox" id="english" name="language_english">
         <label for="english">English</label>
@@ -135,16 +140,21 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="interests">Interests</label>
+      <label for="interests">Interests <a href="interests.html"><img class="edit" src="/images/edit.png"></a></label>
       <textarea id="interests" name="interests" placeholder="Your interests..."></textarea>
+    </div>
+    <div class="form-group">
+      <label for="travel-style">Travel Style <a href="travel-style.html"><img class="edit" src="/images/edit.png"></a></label>
+      <textarea id="travel-style" name="travel-style" placeholder="Your travel style..."></textarea>
     </div>
   </div>
   </div>
 </div>
+</div>
   <button id="submit" type="submit" class="update-button">Update</button>
   </form>
 
-</div>
+
    
       <script>
         // You can use this function to close the Bootstrap modal.
@@ -189,12 +199,34 @@
   
             window.onload = () => {
         // Load saved data into the form if it exists, but only set it, not bind any input events here
-        const userName = localStorage.getItem('userName');
-        if (userName) {
-            document.getElementById('first-name').value = userName;
+        const firstName = localStorage.getItem('firstName');
+        const lastName = localStorage.getItem('lastName');
+        const phoneNumber = localStorage.getItem('phoneNumber');
+        const travelInformation = localStorage.getItem('travelInformation');
+        const bio = localStorage.getItem('bio');
+        const hobbies = localStorage.getItem('hobbies');
+        const interests = localStorage.getItem('interests');
+        const profilePicture = localStorage.getItem('profilePicture');
+        
+        if (firstName) {
+            document.getElementById('first-name').value = firstName;
+        }
+        if (lastName) {
+            document.getElementById('last-name').value = lastName;
+        }
+        if (phoneNumber) {
+            document.getElementById('phone-number').value = phoneNumber;
+        }
+        if (travelInformation) {
+            document.getElementById('travel-information').value = travelInformation;
+        }
+        if (bio) {
+            document.getElementById('bio').value = bio;
+        }
+        if (interests) {
+            document.getElementById('interests').value = interests;
         }
 
-        const profilePicture = localStorage.getItem('profilePicture');
         if (profilePicture) {
             document.querySelector('.profile-pic').src = profilePicture;
         }

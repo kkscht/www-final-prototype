@@ -17,11 +17,42 @@ navLinks.forEach(function(navLink) {
 
 
 window.onload = () => {
-       
+
+    
+
+    
+
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+    const phoneNumber = localStorage.getItem('phoneNumber');
+    const travelInformation = localStorage.getItem('travelInformation');
+    const bio = localStorage.getItem('bio');
+    const interests = localStorage.getItem('interests');
     const profilePicture = localStorage.getItem('profilePicture');
+    const other = localStorage.getItem('other');
+    
+
     if (profilePicture) {
-      document.querySelector('.profile-pic').src = profilePicture;
+        document.querySelector('.profile-pic').src = profilePicture;
     }
+
+    if (firstName) {
+        document.getElementById('full-name').innerHTML = firstName;
+    }
+    if (lastName) {
+ 
+        document.getElementById('full-name').innerHTML += ' ' + lastName;
+    }
+    // if (phoneNumber) {
+    //     document.getElementById('phone-number').innerHTML = phoneNumber;
+    // }
+    if (travelInformation) {
+        document.getElementById('travel-information').innerHTML = travelInformation;
+    }
+    if (bio) {
+        document.getElementById('bio').innerHTML = bio;
+    }
+
   };
 
 

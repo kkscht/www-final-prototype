@@ -314,10 +314,21 @@
           <h4>Paramedic</h4>
           <p id="medical-number-display" class="dot-flashing phone-number"></p>
 
-          
-          
+          <h4>Non-emergency Police</h4>
+          <p id="non-emergency-display" class="dot-flashing phone-number"></p>
+
+          <h4>Poison Control</h4>
+          <p id="poison-control-display" class="dot-flashing phone-number"></p>
+          <br>
+          <button type="button" class="btn btn-secondary" id="save-emergency-numbers">Save</button>
+
+          <br><br>
+          <div id="saved-info"></div>
         </div>
       </div>
+
+      
+
 
       <div class="hidden element-blurb" id="safety-blurb">
   
@@ -366,11 +377,6 @@
       Embassy: document.getElementById("embassy-blurb"),
     };
 
-    // Smart call check //
-    var numbersSmartCall = false;
-    var safetySmartCall = false;
-    // //
-
     const navigateToBlurb = (sectionName) => {
         if (!blurbElements[sectionName]) {
           throw new Error(`No blurb found for ${sectionName} section`);
@@ -379,16 +385,16 @@
         for (const [name, blurbElement] of Object.entries(blurbElements)) {
           if (name === sectionName) {
             blurbElement.classList.remove("hidden");
-            // console.log(name);
-            // console.log("I can access latitude inside the navigation to blurb func: " + userLatitude);
-            console.log(name + " matches!")
+            // make call to get emergency numbers for area & embassy adress
             if (name==="Emergency" || name==="Embassy" && numbersSmartCall===false) {
               // getNumbers(userLatitude, userLongitude, example);
-              console.log("Call for getNumbers")
+              console.log("Call Emergency/Embassy");
+              getSmartNumbers(safetySmartCall);
             } else if (name=="Safety" && safetySmartCall===false) {
+              console.log("Call safety response");
+              getSmartNumbers(safetySmartCall);
               //getSafety(userLatitude, userLongitude);
             }
-              
           } else {
             blurbElement.classList.add("hidden");
           }
@@ -421,7 +427,7 @@
         
       });
 
-      ////// home functionality
+      ////// Hide/Show home functionality
 
       const navigateHome = () => {
         for (const blurbElement of Object.values(blurbElements)) {
@@ -437,19 +443,41 @@
       });
 
       // Online/Offline detection to be worked into geolocation search
-      console.log('Initially ' + (window.navigator.onLine ? 'on' : 'off') + 'line');
+      // console.log('Initially ' + (window.navigator.onLine ? 'on' : 'off') + 'line');
 
-      window.addEventListener('online', () => console.log('Became online'));
-      window.addEventListener('offline', () => console.log('Became offline'));
+      // window.addEventListener('online', () => console.log('Became online'));
+      // window.addEventListener('offline', () => console.log('Became offline'));
       // end of online/offline detection
 
       // LOGIC FOR GEOLOCATION!!!!!
-      // structure from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch 
-      //
       //
       // Coordinates collected on load, smart calls should be triggered when navigating to blurb
-      var userLatitude = 39.8283;
-      var userLongitude = 98.5795;
+      // Default: Jacobs Hall, Berkeley, CA
+      var userLatitude = 37.876062;
+      var userLongitude = -122.2588;
+      var userCity = "Berkeley";
+      var userState = "California";
+      var userCountry = "United States";
+      
+      // Check if 'emergencyNumbers' is present in local storage
+      const savedEmergencyNumbers = localStorage.getItem('emergencyNumbers');
+
+      // Display the saved information in 'saved-info' div if it's present
+      if (savedEmergencyNumbers) {
+          const parsedEmergencyNumbers = JSON.parse(savedEmergencyNumbers);
+          const savedInfoDiv = document.getElementById('saved-info');
+          savedInfoDiv.innerHTML = `
+              <h3>Saved Emergency Numbers</h3>
+              <p style="font-weight: bold">${userCity}, ${userState}, ${userCountry}</p>
+              <p>Police: ${parsedEmergencyNumbers.police}</p>
+              <p>Fire Department: ${parsedEmergencyNumbers.fire}</p>
+              <p>Paramedic: ${parsedEmergencyNumbers.medical}</p>
+              <p>Non-emergency Police: ${parsedEmergencyNumbers.nonEmergency}</p>
+              <p>Poison Control: ${parsedEmergencyNumbers.poisonControl}</p>
+          `;
+      }
+      
+      // Initial loader for location fetch
       document.getElementById("location-text").innerHTML = "<p style=\"font-style: italic; color: #F16291\">Fetching location..."
         
       if ("geolocation" in navigator) {
@@ -458,81 +486,191 @@
           userLatitude = position.coords.latitude;
           userLongitude = position.coords.longitude;
           console.log("User's Lat & Long: [" + userLatitude + ", " + userLongitude + "]");
-          // getNumbers(userLatitude, userLongitude);
-          responseLoaded(userLatitude, userLongitude, exampleResponse);
-          safetyResponseLoaded(userLatitude, userLongitude, exampleSafetyResponse);
+          coorToLocation(userLatitude, userLongitude);
+          // responseLoaded(userLatitude, userLongitude, exampleResponse);
+          // safetyResponseLoaded(userLatitude, userLongitude, exampleSafetyResponse);
           // for now, change class of loaders & location when obtaining coordinates; real implementation will do this after fetching response
         });
       } else {
-        /* geolocation IS NOT available, assign defaults of the geographical center of the USA [39.8283° N, 98.5795° W] */
-        userLatitude = 39.8283;
-        userLongitude = 98.5795;
-        console.log("Default Lat & Long used (geographical center of the USA): [" + userLatitude + ", " + userLongitude + "]");
+        /* geolocation IS NOT available, assign defaults to Jacobs Hall, Berkeley, CA */
+        userLatitude = 37.876062;
+        userLongitude = -122.2588;
+        console.log("Default Lat & Long used (Jacobs Hall): [" + userLatitude + ", " + userLongitude + "]");
         // getNumbers(userLatitude, userLongitude);
         responseLoaded(userLatitude, userLongitude, exampleResponse);
       }
 
-      // AI smart call, commented to save tokens (use example response to help format!)
-      //
-      // async function getNumbers(lat, lon) {
-      //   const latLongString = lat + ", " + lon;
-      //   console.log(latLongString);
-      //   const response = await fetch(
-      //     'https://noggin.rea.gent/exceptional-stingray-1544',
-      //     {
-      //       method: 'POST',
-      //       headers: {
-      //         'Content-Type': 'application/json',
-      //         Authorization: 'Bearer rg_v1_9tkx496eqkm1zwop5h9ss0o28w3qrgo7nb8o_ngk',
-      //       },
-      //       body: JSON.stringify({
-      //         // fill variables here.
-      //         "coordinates": latLongString,
-      //       }),
-      //     }
-      //   ).then(response => response.text());
-      //   console.log(response);
-      //   numbersSmartCall = true;
-      //   }
+    // takes coordinates found in geolocation & maps to human-readable address
+    async function coorToLocation(lat, long) {
+      const geoUrl = "https://geocode.maps.co/reverse?lat=" + lat + "&lon=" + long + "&api_key=66295190de2ad644690022wyo8ab17d";
+      console.log(geoUrl);
+      const response = await fetch(geoUrl)
+        .then(response => response.json());
+      console.log(response);
+      // now we have a location attached to coordinates, let's display and assign the values
+      document.getElementById("dot-loader").classList.add("hidden");
+      document.getElementById("location-display").classList.remove("hidden");
 
-      // response to first working call = 
-          //{
-          //   "location": {
-          //     "city": "Oakland",
-          //     "state": "California",
-          //     "country": "United States"
-          //   },
-          //   "emergency_numbers": {
-          //     "police": "911",
-          //     "fire_department": "911",
-          //     "emergency_services": "911"
-          //   },
-          //   "nearest_embassy": {
-          //     "address": "U.S. Consulate General, 1 Sansome Street, Suite 850, San Francisco, CA 94104"
-          //   }
-          // }
-          // 
+      userCity = response.address.city;
+      userState = response.address.state;
+      userCountry = response.address.country;
+  
+      document.getElementById("location-display").innerHTML = "<p>" + "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-geo-alt\" viewBox=\"0 0 16 20\"> <path d=\"M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10\"/> <path d=\"M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6\"/> </svg>" 
+          + " " + userCity + ", " + userState + ", " + userCountry;
+    }  
+
+    //// smart calls ////
+    //
+    // Smart call check //
+    var numbersSmartCall = false;
+    var safetySmartCall = false;
+    // //
+    async function getSmartNumbers(smartCall) {
+      console.log(smartCall);
+      console.log(numbersSmartCall);
+      if (smartCall===true||numbersSmartCall===true) {
+        console.log("We already called reagent, load in from localStorage");
+      } else {
+        numbersSmartCall = true;
+        const locationForFetch = userCity + ", " + userState + ", " + userCountry;
+        console.log("Location for emergency number call: " + locationForFetch);
+        const response = await fetch(
+          'https://noggin.rea.gent/exceptional-stingray-1544',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer rg_v1_9tkx496eqkm1zwop5h9ss0o28w3qrgo7nb8o_ngk',
+            },
+            body: JSON.stringify({
+              // fill variables here.
+              "coordinates": locationForFetch,
+            }),
+          }
+        ).then(response => response.text());
+        console.log(response);
+        const addBrace = "{" + response;
+        console.log(addBrace);
+        jsonResponse = JSON.parse(addBrace);
+        console.log(jsonResponse);
+
+        document.getElementById("police-number-display").classList.remove("dot-flashing");
+        document.getElementById("police-number-display").innerHTML = "<p>" + jsonResponse.police;
+          
+        document.getElementById("medical-number-display").classList.remove("dot-flashing");
+        document.getElementById("medical-number-display").innerHTML = "<p>" + jsonResponse.emergency;
+
+        document.getElementById("fire-number-display").classList.remove("dot-flashing");
+        document.getElementById("fire-number-display").innerHTML = "<p>" + jsonResponse.fire;
+
+        document.getElementById("non-emergency-display").classList.remove("dot-flashing");
+        document.getElementById("non-emergency-display").innerHTML = "<p>" + jsonResponse.non_emergency;
         
-          // async function getSafety(lat, lon) {
+        document.getElementById("poison-control-display").classList.remove("dot-flashing");
+        document.getElementById("poison-control-display").innerHTML = "<p>" + jsonResponse.poison_control;
+      }
+    }
 
-          // }
+    const saveButton = document.getElementById('save-emergency-numbers');
 
-        const exampleResponse = {
-            "location": {
-              "city": "Oakland",
-              "state": "California",
-              "country": "United States"
+    // Save Button logic for "emergency numbers" section
+    // Add click event listener to the save button
+    saveButton.addEventListener('click', function() {
+        // Get all the information from the section-info div
+        console.log(document.getElementById('police-number-display').textContent);
+
+        const emergencyNumbers = {
+            police: document.getElementById('police-number-display').textContent,
+            fire: document.getElementById('fire-number-display').textContent,
+            medical: document.getElementById('medical-number-display').textContent,
+            nonEmergency: document.getElementById('non-emergency-display').textContent,
+            poisonControl: document.getElementById('poison-control-display').textContent,
+        };
+
+        // Save the information to local storage
+        localStorage.setItem('emergencyNumbers', JSON.stringify(emergencyNumbers));
+
+        // Display the saved information in a new div below the card
+        const savedInfoDiv = document.getElementById('saved-info');
+        savedInfoDiv.innerHTML = `
+            <h3>Saved Emergency Numbers</h3>
+            <p style="font-weight: bold">${userCity}, ${userState}, ${userCountry}</p>
+            <p>Police: ${emergencyNumbers.police}</p>
+            <p>Fire Department: ${emergencyNumbers.fire}</p>
+            <p>Paramedic: ${emergencyNumbers.medical}</p>
+            <p>Non-emergency Police: ${emergencyNumbers.nonEmergency}</p>
+            <p>Poison Control: ${emergencyNumbers.poisonControl}</p>
+        `;
+    });
+    /////////// END OF EMERGENCY NUMBERS FUNCTIONS ///////////
+    //////////////////////////////////////////////////////////
+
+    ////////// START OF SMART SAFETY RECOMMENDATIONS //////////
+    //////////////////////////////////////////////////////////
+    async function getSmartNumbers(smartCall) {
+      console.log(smartCall);
+      console.log(safetySmartCall);
+      if (smartCall===true||safetySmartCall===true) {
+        console.log("We already called reagent, load in from localStorage");
+      } else {
+        // fetch to Llama 3 model for Dos and Dont's
+        safetySmartCall = true;
+        const locationForFetch = userCity + ", " + userState + ", " + userCountry;
+        const response = await fetch(
+          'https://noggin.rea.gent/zygotic-tern-3113',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer rg_v1_38ej8kj0y2nrrz3zagodeg2h2s3i3gklz2th_ngk',
             },
-            "emergency_numbers": {
-              "police": "911",
-              "fire_department": "911",
-              "emergency_services": "911"
-            },
-            "nearest_embassy": {
-              "address": "U.S. Consulate General, 1 Sansome Street, Suite 850, San Francisco, CA 94104"
-            }
-          };
-        console.log(exampleResponse);
+            body: JSON.stringify({
+              // fill variables here.
+              "destination": locationForFetch,
+            }),
+          }
+        ).then(response => response.text());
+        console.log(response);
+        console.log("Response from LLAMA done, calling GPT 3.5 for formatting");
+
+        /// fun call for now
+        console.log("called safetyResponseLoaded");
+        document.getElementById("safety-display").classList.remove("dot-flashing");
+        document.getElementById("safety-display").innerHTML = "<p>" + response + "<br><br><br>";
+        // GPT 3.5 call for formatting
+
+
+      } // end bracket for all smart calls
+    }
+
+
+
+    const jacobsLocationExampleGeolocation = {
+      "place_id":287811806,
+      "licence":"Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "osm_type":"way",
+      "osm_id":440146220,
+      "lat":"37.87602295",
+      "lon":"-122.25880923634372",
+      "display_name":"Jacobs Hall, 2530, Ridge Road, Northside, Berkeley, Alameda County, California, 94720, United States",
+      "address":
+        {
+          "building":"Jacobs Hall",
+          "house_number":"2530",
+          "road":"Ridge Road",
+          "neighbourhood":"Northside",
+          "city":"Berkeley",
+          "county":"Alameda County",
+          "state":"California",
+          "ISO3166-2-lvl4":"US-CA",
+          "postcode":"94720",
+          "country":"United States",
+          "country_code":"us"
+        },
+      "boundingbox":
+        ["37.8759257","37.8761385","-122.2590453","-122.2585814"]
+      };
+
 
         const exampleSafetyResponse = {
             "Introduction": "Traveling alone as a young woman can be an empowering and enriching experience, but it's important to prioritize safety and cultural awareness. Here are some tips for a woman in her 20s traveling alone to Berkeley, CA, as a U.S. citizen who speaks English and Arabic.",
@@ -559,18 +697,18 @@
           document.getElementById("location-display").classList.remove("hidden");
 
           // document.getElementById("h").classList.add("hidden");
-          document.getElementById("location-display").innerHTML = "<p>" + "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-geo-alt\" viewBox=\"0 0 16 20\"> <path d=\"M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10\"/> <path d=\"M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6\"/> </svg>" 
-          + " " + exampleResponse.location.city + ", " + exampleResponse.location.state + ", " + exampleResponse.location.country;
+          // document.getElementById("location-display").innerHTML = "<p>" + "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-geo-alt\" viewBox=\"0 0 16 20\"> <path d=\"M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10\"/> <path d=\"M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6\"/> </svg>" 
+          // + " " + exampleResponse.location.city + ", " + exampleResponse.location.state + ", " + exampleResponse.location.country;
 
-          //load all phone numbers into their divs
-          document.getElementById("police-number-display").classList.remove("dot-flashing");
-          document.getElementById("police-number-display").innerHTML = "<p>" + exampleResponse.emergency_numbers.police;
+          // //load all phone numbers into their divs
+          // document.getElementById("police-number-display").classList.remove("dot-flashing");
+          // document.getElementById("police-number-display").innerHTML = "<p>" + exampleResponse.emergency_numbers.police;
           
-          document.getElementById("medical-number-display").classList.remove("dot-flashing");
-          document.getElementById("medical-number-display").innerHTML = "<p>" + exampleResponse.emergency_numbers.emergency_services;
+          // document.getElementById("medical-number-display").classList.remove("dot-flashing");
+          // document.getElementById("medical-number-display").innerHTML = "<p>" + exampleResponse.emergency_numbers.emergency_services;
 
-          document.getElementById("fire-number-display").classList.remove("dot-flashing");
-          document.getElementById("fire-number-display").innerHTML = "<p>" + exampleResponse.emergency_numbers.fire_department;
+          // document.getElementById("fire-number-display").classList.remove("dot-flashing");
+          // document.getElementById("fire-number-display").innerHTML = "<p>" + exampleResponse.emergency_numbers.fire_department;
 
           document.getElementById("embassy-display").classList.remove("dot-flashing");
           document.getElementById("embassy-display").innerHTML = "<p>" + exampleResponse.nearest_embassy.address;

@@ -8,7 +8,6 @@ document.getElementById('submit').addEventListener('click', function(event){
   localStorage.setItem('phoneNumber', document.getElementById('phone-number').value);
   localStorage.setItem('travelInformation', document.getElementById('travel-information').value);
   localStorage.setItem('bio', document.getElementById('bio').value);
-  localStorage.setItem('interests', document.getElementById('interests').value);
   localStorage.setItem('profilePicture', window.tempProfilePic || localStorage.getItem('profilePicture'));
 
 

@@ -75,6 +75,7 @@ nav a.active i {
   color: #F16291;
 }
 
+
 /*
   ////////////////////////////////////////////////////////////////////////////////////
   ************************************************************************************
@@ -342,8 +343,9 @@ footer {
     margin: 3px;
     font-size: 10px;
     color: black;
-    cursor: pointer;
+    cursor: pointer;s
     outline: none;
+    margin-bottom: 10px;
   }
   
   .menu button:hover {
@@ -355,14 +357,13 @@ footer {
   .profile-info {
     background: #FBD0DE;
     border: 1.5px solid black;
-    border-radius: 20px;
     padding: 0px 10px;
-    margin-top: 20px;
     font-size: 10px;
     color: black;
     cursor: pointer;
     outline: none;
     height: 400px;
+    border-top: none;
   }
 
 h5 {
@@ -402,6 +403,14 @@ p {
     color: black;
     cursor: pointer;
     outline: none;
+}
+
+
+.regular-scroll {
+  padding: 10px;
+  height: 95%;
+  overflow-y: scroll;
+
 }
 
 
@@ -572,4 +581,86 @@ textarea {
 
 .edit {
   padding-top: 1mm;
+}
+
+/* Mobile Tabs */
+.mobile-tabs li {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(142, 142, 142);
+  line-height: 18px;
+  text-align: center;
+}
+.mobile-tabs li div {
+  font-weight: 600;
+  color: rgb(38, 38, 38);
+}
+.mobile-tabs ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 12px 0;
+  border-top: 1px solid rgb(219, 219, 219);
+}
+.tabSection {
+  background: #FBD0DE;
+  border-right: 1.5px solid black;
+  border-top: 1.5px solid black;
+  fill: gray;
+  display: flex;
+  justify-content: space-around;
+  height: 44px;
+  align-items: center;
+}
+
+.tabSection a {
+  display: flex;
+  justify-content: space-around;
+  height: 44px;
+  align-items: center;
+}
+
+
+.tabSection.tab-link {
+  border-bottom: black;
+}
+
+a.tab-link  {
+  border-left: 1.5px solid black;
+  width: 150%;
+  border-bottom: 1.5px solid black;
+}
+
+a.tab-link.active-tab  {
+  width: 150%;
+  border-bottom: 1.5px solid #FBD0DE;
+}
+
+.tab-link.active-tab svg {
+  fill: #F16291;
+
+}
+
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+@media only screen and (max-width: 735px) {
+  .gallery {
+    gap: 3px;
+  }
+}
+.gallery-item {
+  position: relative;
+}
+.gallery-item img {
+  width: 100%;
+  display: block;
+}
+.gallery-item .media-icon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }

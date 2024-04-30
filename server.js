@@ -70,12 +70,39 @@ app.get('/add/:first/:second', (request, response) => {
 //   filesystem operation before responding to the user.
 // Try visiting http://localhost:8000/a rather than http://localhost:8000/a.html -- you'll notice that
 //   it works just the same!
-app.get('/dashboard', async (request, response) => {
-  const htmlContents = await fs.readFile('public/dashboard.html');
-  response.status(200).send(htmlContents.toString());
-});
+// app.get('/dashboard', async (request, response) => {
+//   const htmlContents = await fs.readFile('public/dashboard.html');
+//   response.status(200).send(htmlContents.toString());
+// });
+
 
 // Express has a helper function for this, so we don't need to use the filesystem library directly:
+app.get('/dashboard', (request, response) => {
+  response.status(200).sendFile('public/dashboard.html', { root: __dirname }); // We do need to tell Express where to look!
+});
+
+
+
+app.get('/dashboard/all-trips', (request, response) => {
+  response.status(200).sendFile('public/dashboard/all-trips.html', { root: __dirname }); // We do need to tell Express where to look!
+});
+
+
+app.get('/dashboard/edit-profile', (request, response) => {
+  response.status(200).sendFile('public/dashboard/edit-profile.html', { root: __dirname }); // We do need to tell Express where to look!
+});
+
+app.get('/dashboard/bookmarks', (request, response) => {
+  response.status(200).sendFile('public/dashboard/bookmarks.html', { root: __dirname }); // We do need to tell Express where to look!
+});
+
+app.get('/dashboard/settings', (request, response) => {
+  response.status(200).sendFile('public/dashboard/settings.html', { root: __dirname }); // We do need to tell Express where to look!
+});
+
+
+
+
 app.get('/safety', (request, response) => {
   response.status(200).sendFile('public/safety.html', { root: __dirname }); // We do need to tell Express where to look!
 });

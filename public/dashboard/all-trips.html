@@ -30,6 +30,25 @@
      -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
     }
+    .trip-container {
+    background: pink;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .trip-header {
+    background: #ffe0f0;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+  .trip-details {
+    display: none;
+    padding: 5px;
+  }
+  .loading {
+    color: red;
+  }
+        /* Add additional CSS to style form elements, buttons, etc. */
     </style>
   </head>
 
@@ -77,12 +96,60 @@
 
       <main>
         
-        <p>
-            Under construction.
-        </p>
+        <div id="trip-planner">
+          <!-- Shanghai Trip -->
+          <div class="trip-container">
+            <div class="trip-header">Shanghai, China (March 2024)</div>
+            <button onclick="toggleDetails('shanghai-details')">Toggle Details</button>
+            <div id="shanghai-details" class="trip-details">
+              <!-- Details here -->
+              <div class="loading">Loading trip details...</div>
+            </div>
+          </div>
+        
+          <!-- Agra Trip -->
+          <div class="trip-container">
+            <div class="trip-header">Agra, India (December 2025)</div>
+            <button onclick="toggleDetails('agra-details')">Toggle Details</button>
+            <div id="agra-details" class="trip-details">
+              <!-- Details here -->
+            </div>
+          </div>
+        
+          <!-- Melbourne Trip -->
+          <div class="trip-container">
+            <div class="trip-header">Melbourne, Australia (May 2024)</div>
+            <button onclick="toggleDetails('melbourne-details')">Toggle Details</button>
+            <div id="melbourne-details" class="trip-details">
+              <!-- Details here -->
+            </div>
+          </div>
+        
+          <!-- Victoria Trip -->
+          <div class="trip-container">
+            <div class="trip-header">Victoria, Seychelles (July 2019)</div>
+            <button onclick="toggleDetails('victoria-details')">Toggle Details</button>
+            <div id="victoria-details" class="trip-details">
+              <!-- Details here -->
+            </div>
+          </div>
+        </div>
+        
+        <script>
+          // JavaScript for toggling the display of trip details
+          function toggleDetails(detailsId) {
+            var details = document.getElementById(detailsId);
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+          }
+        </script>
+        
+     
       </main>
     </div>
 
+
+
+  
   </body>
   <script>
     // Get the current page URL

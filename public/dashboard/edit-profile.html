@@ -39,7 +39,7 @@
     
       <div class="navbar">
         <h1>Edit Profile</h1>
-        <a href="/dashboard.html" class="back-button">&larr; Back</a>
+        <a href="/dashboard" class="back-button">&larr; Back</a>
       </div>
     </header>
 
@@ -141,7 +141,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <label >
+            <label for="profile-photos" >
               Choose new photos:
             </label>
             <input type="file" id="files" name="files" multiple>
@@ -263,8 +263,9 @@
             };
           });
         };
-            // Your solution here:
-  
+        
+    
+      
             window.onload = () => {
         // Load saved data into the form if it exists, but only set it, not bind any input events here
         const firstName = localStorage.getItem('firstName');
@@ -310,6 +311,7 @@
             });
         };
     });
+
 
   
       </script>

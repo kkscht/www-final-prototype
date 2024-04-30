@@ -25,6 +25,7 @@
     <style>
      h1 {
       font-family: "Cabin";
+      text-align: center;
      }
 
      h2 {
@@ -32,9 +33,12 @@
      }
 
      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+        /* display: flex; */
+        /* justify-content: space-between; */
+        align-items: center;
+        align-content: center;
+        text-align: center;
+        /* align-items: flex-start; */
       }
 
       .home.hidden,
@@ -177,11 +181,9 @@
   </head>
 
   <!-- you can also specify styles straight in html! Let's use Arial and gray text on this page.-->
-  <body style="color: #0f0a0a">
-    <header
-      style="background-color: #fbd0de; padding: 15px; text-align: center"
-    >
-      <h1>Safety</h1>
+  <body style="color: #0f0a0a;">
+    <header style="padding: 10px; text-align: center">
+      <h1 style="text-align: center;">Safety</h1>
     </header>
 
     <div class="site-view">
@@ -282,8 +284,8 @@
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h2 class="card-title">Nearest U.S. Embassy</h2>
-                  <h6 class="card-subtitle mb-2 text-muted">Get help fast in foreign countries</h6>
+                  <h2 class="card-title">Passport Help</h2>
+                  <h6 class="card-subtitle mb-2 text-muted">Find the nearest U.S. Passport Office or Embassy</h6>
 
                 </div>
               </div>
@@ -342,8 +344,8 @@
       <div class="hidden element-blurb" id="embassy-blurb">
         
          <div class="section-info">  <!-- planet-info -->
-          <h2>Nearest U.S. Embassy</h2>
-          <h4>Address:</h4>
+          <h2>Passport Help</h2>
+          <h4>Address of nearest office:</h4>
           <p id="embassy-display" class="dot-flashing phone-number"></p>
         </div>
       </div>
@@ -386,14 +388,16 @@
           if (name === sectionName) {
             blurbElement.classList.remove("hidden");
             // make call to get emergency numbers for area & embassy adress
-            if (name==="Emergency" || name==="Embassy" && numbersSmartCall===false) {
+            if (name==="Emergency" && numbersSmartCall===false) {
               // getNumbers(userLatitude, userLongitude, example);
-              console.log("Call Emergency/Embassy");
-              getSmartNumbers(safetySmartCall);
+              console.log("Call Emergency");
+              getSmartNumbers(numbersSmartCall);
             } else if (name=="Safety" && safetySmartCall===false) {
               console.log("Call safety response");
-              getSmartNumbers(safetySmartCall);
+              getSmartSafety(safetySmartCall);
               //getSafety(userLatitude, userLongitude);
+            } else if (name==="Embassy" && numbersSmartCall===false) {
+              getEmbassy(embassySmartCall);
             }
           } else {
             blurbElement.classList.add("hidden");
@@ -524,6 +528,7 @@
     // Smart call check //
     var numbersSmartCall = false;
     var safetySmartCall = false;
+    var embassySmartCall = false;
     // //
     async function getSmartNumbers(smartCall) {
       console.log(smartCall);
@@ -607,7 +612,7 @@
 
     ////////// START OF SMART SAFETY RECOMMENDATIONS //////////
     //////////////////////////////////////////////////////////
-    async function getSmartNumbers(smartCall) {
+    async function getSmartSafety(smartCall) {
       console.log(smartCall);
       console.log(safetySmartCall);
       if (smartCall===true||safetySmartCall===true) {
@@ -639,10 +644,42 @@
         document.getElementById("safety-display").innerHTML = "<p>" + response + "<br><br><br>";
         // GPT 3.5 call for formatting
 
-
+        
       } // end bracket for all smart calls
     }
 
+    /////////// END OF SMART SAFETY RECOMMENDATIONS ///////////
+    //////////////////////////////////////////////////////////
+
+    ///////// START OF SMART EMBASSY/PASSPORT OFFICE //////////
+    //////////////////////////////////////////////////////////
+    async function getEmbassy(smartCall) {
+      if (smartCall===true || embassySmartCall===true) {
+        console.log("We already called reagent for embassy, do not recall");
+      } else {
+        embassySmartCall = true;
+        // smart call
+        const response = await fetch(
+          'https://noggin.rea.gent/encouraging-whale-5518',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer rg_v1_39p516tfo16is8ef6ypi25fsdeq6t5g8nzvy_ngk',
+            },
+            body: JSON.stringify({
+              // fill variables here.
+              "lat": userLatitude,
+              "long": userLongitude,
+            }),
+          }
+        ).then(response => response.text());
+        console.log(response);
+
+        document.getElementById("embassy-display").classList.remove("dot-flashing");
+        document.getElementById("embassy-display").innerHTML = "<p>" + response;
+      }
+     }
 
 
     const jacobsLocationExampleGeolocation = {

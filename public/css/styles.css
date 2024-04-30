@@ -335,7 +335,7 @@ footer {
     margin-top: 20px;
   }
   
-  .menu button {
+  /* .menu button {
     background: #FBD0DE;
     border: 2px solid black;
     border-radius: 20px;
@@ -351,7 +351,7 @@ footer {
   .menu button:hover {
     background: #E91E63;
     color: #fff;
-  }
+  } */
 
 
   .profile-info {

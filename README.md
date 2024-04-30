@@ -1,115 +1,57 @@
-## WWW Final Prototype
+# Wanderella
 
-Everything below this line of text comes from the express-stack-starter code repositiory that can be found [here](https://github.com/cs160-spring2024/express-stack-starter)!
+This is the prototype for CS160 Spring 2024 - User Interface Design & Development (Tim's section, 104-6: WorldWide Women)
 
-Hello friend! 
+The express-stack-starter code repositiory that helped set up the local host can be found [here](https://github.com/cs160-spring2024/express-stack-starter)!
 
-This starter repository contains a few linked HTML, CSS, and JavaScript webpage files that you can use as a basis for your own website.
-
-In addition to the frontend code, we've included a simple Web server that will run locally and serve your project files to your web browser over HTTP.
-
-## Cloning the repository
-
-If you're here after accepting a GitHub Classroom assignment, you'll have your own copy of this starter repository in your GitHub account.
-You can [clone it](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) the typical way, using the `git` commandline tool.
-
-It's important to **clone** the repository rather than just downloading its contents (say, as a ZIP file).
-That way, you'll be able to [commit and push](https://docs.github.com/en/get-started/using-git/about-git) your changes back to the repository when you've finished the assignment, which you **are required to do** so that we can see and grade your code.
-
-You're welcome to use a non-commandline Git client (like [GitHub Desktop](https://desktop.github.com/)) for your Git operations, but you'll need to use the commandline for the next step.
-On Windows, this will probably be PowerShell; on macOS, you can use the zsh Terminal application; and other operating systems will have their own commandline software (e.g. `bash` and `gnome-terminal` on some Linux installations).
-You may also be able to use a terminal built into your text editor, like VS Code or vim.
-
-## Running the server
-
-Make sure you have recent versions of `node` and `npm` installed (definitely at least version 12 of Node).
-Installation instructions for most operating systems are available [on the Node.js website](https://nodejs.org/en/download).
-You can check your `node` and `npm` versions using the following commands:
-
-```bash
-node --version
-npm --version
-```
-
-Node.js is a tool that enables you to run JavaScript code outside of the web browser; it's a full-featured language runtime just like the `python3` or `java` command, and you can build desktop software using Node.js.
-In this case, we'll use it to run a simple Web server that serves files from the project directory.
-Although the code in `server.js` is written in JavaScript just like the JavaScript code within the `public/` directory, the code runs very differently.
-In the &ldquo;real world&rdquo;, as a Web developer, you would run `server.js` on some computer you control in the cloud (say, an Amazon AWS server).
-When people visit your website, they download HTML, CSS, and JavaScript code from your server, and that frontend code runs on their own computer.
-
-Since you're developing this project locally, all of the code will live and run on your own computer.
-Code in `server.js`, however, runs within the Node.js runtime, and the downloaded code in the `public/` directory will run within your web browser, which communicates with the web browser much as it would communicate with a real remote server when you typically brows the Internet.
-
-### Installing the server dependencies
-
-This repository contains a `package.json` file, which is the standard way to tell Node.js some information about the program, including what libraries are needed to run the server code.
-The server software requires an external library called [Express](https://expressjs.com/), which makes it easy to develop Web servers.
-
-Run the `install` command in `npm`, Node's default package manager:
+To install server depedencies, use:
 
 ```bash
 npm install
 ```
 
-This will read `package.json`, then look to the [NPM package repository](https://www.npmjs.com/) to grab the appropriate dependencies.
-
-### Run the server
-
-Run the server script on your development computer:
+Then run the server script on your development computer:
 
 ```bash
 node server.js
-```
+``` 
 
-This will start a long-running process (though you should be able to stop it with `Ctrl+C` or by closing your terminal window).
-The server binds to `localhost:8000`, by default, meaning you should be able to access the web server by visiting [http://localhost:8000](http://localhost:8000) in your Web browser.
+## Problem Statement
 
-If you need to change the port or host, the server code will also accept a port number or host from the environment, which looks like this on macOS or Linux:
+Young women face unique gender-specific challenges while traveling. Confidence in one’s safety is a common deterrent in traveling solo, as women are more likely to be targets of harassment and assault. Even with copious amounts of planning, it is easy to overlook information such as emergency numbers or the reputation of a last-minute hostel booking.
 
-```
-HOST=0.0.0.0 PORT=3000 node server.js
-```
+There is a need to increase the accessibility of information (emergency, cultural, etc.) as well as tools regarding the general safety of young solo female travelers as they explore international destinations.
 
-This is handy if you already have a process running on port 8000 or if you need to bind to a more public network interface (typically useful **if you want to connect to the server from other devices on your network**, like a mobile phone).
 
-### Poke around
+## Target User Group
 
-You may not need to make any changes to the server code for your assignment, but it doesn't hurt to read the code and try making some changes.
-Since you're using version control, you can always reset the server code if you break anything!
-Make sure to stop and restart the server each time you make changes.
+Our target user group is specific to young women who are traveling individually to an international destination, whose main concerns are related to safety.
+ 
+Their primary needs relate to being able to store and access emergency and personal information quickly from any location, and they want to be able to learn from other women regarding safety concerns in the area they are traveling to. Their highest priority is to be fully immersed in the culture and experiences offered by the destination while having a safe accommodation to rest at the end of the day.
 
-I've written some code comments to point out various Express features that control the server's behavior.
 
-## Make it your own!
+### Solution
+Wanderella utilizes Google Maps APIs, Reagent (service for forwarding requests to popular LLMs), Geolocation, and local storage on the user’s device. All of these services provide persistent and personalized data responses based on the user’s profile and current location. The use of the Bootstrap library and icons allow for consistent imagery, aesthetic, and usability. 
 
-Here's how this repository is laid out.
+Navigation is largely controlled by a navigation bar on the bottom of the user’s window, as the application is intended for on-the-go use while traveling (mimicking a native application, but on the web).
 
-Edit the **HTML files** and the **CSS stylesheet** to make them your own! 
 
-Edit **server.js** if you want to add new pages, change how pages route to one another, if you've renamed your HTML files, etc. 
+### Tasks
 
-```
-starter-code
-│   README.md            // You are here!
-│   server.js            // our Node server that responds to browser requests
-│   package.json         // tells Node how to install the dependencies our server needs
-│
-└───public               // this where all of our static content is stored
-   │   index.html        // The initial view for our web site
-   │   a.html            // these are other pages our website links to. You can add more, but 		
-   │   b.html            //   you might want to update server.js to give them prettier URLs.
-   │   c.html
-   │
-   └───css
-   │  	│   styles.css   // our CSS stylesheet!
-   │   
-   └───images            //images used by our website are stored here
-   	│   bunny.jpg 	
-   	└───...
-```
+Wanderella features 3 main tasks to combat safety concerns while traveling solo.
 
-Alternatively: Delete everything and start over if you want to learn how to set this up on your own, or in your own way!
-Here's some documentation that might be relevant:
+#### Find & Store Safety Information
+Geolocation and local storage allow quick and easy access to emergency service numbers, while an AI assistant delivers location-based safety tips and cultural basics.
 
+#### Profile Dashboard
+A persistent and local dashboard allows users to store any information they wish to have on hand, and this information is used to increase personalization of services.
+
+#### Safety Ratings
+An in-app map and ratings service allows verified users to communicate concerns around their area and identify female-safe housing accommodations.
+
+
+### Helpful citations:
+- https://github.com/cs160-spring2024/express-stack-starter
 - https://expressjs.com/en/starter/hello-world.html
 - https://expressjs.com/en/4x/api.html#express
+- https://rea.gent/

@@ -89,7 +89,7 @@ nav a.active i {
 /* Style for Google Map API Container, sized to fit above nav bar*/
 .map-container {
   flex: 1; /* Make the map container expand to fill remaining space */
-  position: absolute; /* Position absolutely within the site-view container */
+  position: relative; /* Position absolutely within the site-view container */
   top: 0; /* Position at the top of the site-view container */
   left: 0; /* Position at the left of the site-view container */
   width: 100%; /* Occupy full width */
@@ -169,14 +169,6 @@ nav a.active i {
   align-items: flex-end;
 }
 
-.search-bar-hidden {
-  display: none;
-}
-
-.search-bar-visible {
-  display: block;
-}
-
 /* Style for search bar input*/
 .search-bar input[type="text"] {
   border-radius: 50px; /* Adjust the border-radius to make it rounded */
@@ -194,7 +186,6 @@ nav a.active i {
   background: #ffff;
   position: relative;
   width: 100%;
-  min-height: 50vh;
   max-height: 70vh;
   position: absolute;
   z-index: 2;
@@ -204,18 +195,21 @@ nav a.active i {
   display: flex;
   flex-direction: column;
   visibility: hidden;
+  bottom: 0;
 }
 
 #addReportBottomSheet {
   background: #ffff;
+  height: 100%;
 }
 
 #searchResultsBottomSheet {
   background: #ffff;
+  height: 100%;
 }
 
 .search-results {
-  max-height: 70vh;
+  max-height: 50vh;
   overflow-y: auto;
 }
 

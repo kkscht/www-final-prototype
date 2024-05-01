@@ -411,6 +411,83 @@
       });
       </script>
 
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      const filesInput = document.getElementById('files');
+
+      filesInput.addEventListener('change', function(event) {
+          const files = event.target.files;
+          const gallery = document.querySelector('.gallery');
+          let newImages = []; // Array to store the Data URLs of the new images
+
+          if (files.length > 0) {
+              Array.from(files).forEach((file, index, array) => {
+                  const reader = new FileReader();
+
+                  reader.onload = function(e) {
+                      newImages.push(e.target.result); // Add the loaded image to the array
+
+                      // Check if all files have been processed
+                      if (newImages.length === array.length) {
+                          // Combine old and new images and update the gallery and local storage
+                          appendNewImagesAndUpdateGallery(newImages, gallery);
+                      }
+                  };
+
+                  reader.readAsDataURL(file);
+              });
+
+              // Close the modal using Bootstrap 5 modal instance
+              const uploadModal = bootstrap.Modal.getInstance(document.getElementById('uploadModal'));
+              if (uploadModal) {
+                  uploadModal.hide();
+              }
+          }
+      });
+
+        loadImagesFromLocalStorage();
+      });
+
+      function appendNewImagesAndUpdateGallery(newImages, gallery) {
+        // Retrieve existing images from local storage
+        const existingImages = JSON.parse(localStorage.getItem('uploadedImages')) || [];
+
+        // Combine old and new images
+        const allImages = existingImages.concat(newImages);
+
+        // Save the combined array of images to local storage
+        localStorage.setItem('uploadedImages', JSON.stringify(allImages));
+
+        // Display each new image in the gallery
+        newImages.forEach(imageSrc => {
+          createGalleryItem(imageSrc, gallery);
+      });
+    }
+
+    function createGalleryItem(imageSrc, gallery) {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.innerHTML = `<img src="${imageSrc}" alt="Uploaded Image" style="width:100px; height:100px;">`; // Adjust size as needed
+        gallery.appendChild(galleryItem);
+    }
+
+    function loadImagesFromLocalStorage() {
+        const storedImages = JSON.parse(localStorage.getItem('uploadedImages'));
+        const gallery = document.querySelector('.gallery');
+        gallery.innerHTML = ''; // Clear previous images
+
+        if (storedImages && storedImages.length > 0) {
+            storedImages.forEach(imageSrc => {
+                createGalleryItem(imageSrc, gallery);
+          });
+      }
+    }
+
+
+
+    </script>
+  
+
 
 
 

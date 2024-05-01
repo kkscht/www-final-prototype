@@ -20,14 +20,14 @@
 
    <style>
     h1 {
-     font-family: "Arial Black";
-     text-align: left;
-     color: #E91E63;
+     font-family: "Cabin";
+     text-align: center;
+     /* color: #E91E63;
      -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: black; */
     }
     .tags {
-        margin: 15px;
+        margin-top: 0px;
     }
     .tags span {
         background: none;
@@ -80,30 +80,40 @@
   background-color: #E91E63;
   color: #FFF;
 }
+
+    .menu-bar button {
+      /* margin-bottom: 10px;  */
+      background-color: #531A2E;
+    }
+    
+    .menu-bar button:hover {
+      background: #E91E63;
+      color: #f0f0f0;
+    }
     </style>
   </head>
 
   <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
   <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
     <header
-      style="background-color: #FBD0DE; padding: 15px; text-align: center"
+      style="background-color: white; padding: 10px; text-align: center"
     >
     
-
+    <h1>Interests</h1>
     
       <div class="navbar">
-        <h1>Interests</h1> <a href="edit-profile.html" class="back-button">&larr; Back</a>
+        <!-- <h1>Interests</h1> <a href="/dashboard/edit-profile" class="back-button">&larr; Back</a>
         <div><p>Let everyone know what you’re interested
-            in by adding it to your profile!</p></div>
-       
+            in by adding it to your profile!</p></div> -->
+          
       </div>
     </header>
 
  
-   
-
-      
-
+   <div style="display: flex; justify-content: center;text-align: center; margin: 20px;">
+    <p>Let everyone know what you’re interested
+      in by adding it to your profile!</p>
+   </div>
    
       <div class="content-container">
         <div class="edit-info">
@@ -135,7 +145,12 @@
         </div>
         </div>
         </div>
-        <button id="submit" type="submit" class="update-button">Update</button>
+        </div>
+        <!-- <button id="submit" type="submit" class="update-button">Update</button> -->
+        <div id="trips-header" class="menu-bar" style="display: flex; justify-content: space-around;">
+          <a class="btn btn-secondary menu-bar" style="justify-content: center;flex:0.5; margin-right: 10px; margin-left:10px;" href="/dashboard/edit-profile" role="button">Cancel</a>
+          <button id="submit" type="submit" class="btn button" style="align-items: center; background-color: #531A2e;justify-content: center; display:flex; color: #f0f0f0;flex:1; margin-right: 10px;">Update</button>
+        </div>
     </form>
 
 
@@ -184,6 +199,7 @@
                    
                 });
                 alert("Interests updated!");
+                window.location = "/dashboard/edit-profile"
             });
         });
 

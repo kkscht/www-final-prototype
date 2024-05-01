@@ -24,28 +24,86 @@
 
    <style>
     h1 {
-     font-family: "Arial Black";
-     text-align: left;
-     color: #E91E63;
+     font-family: "Cabin";
+     text-align: center;
+     /* color: #E91E63;
      -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: black; */
     }
+    .trip-container {
+    background: pink;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .trip-header {
+    background: #ffe0f0;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+  .trip-details {
+    display: none;
+    padding: 5px;
+  }
+  .loading {
+    color: red;
+  }
+        /* Add additional CSS to style form elements, buttons, etc. */
+
+      .menu-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      /* justify-content: space-between;
+      align-items: center; */
+      &.hidden {
+        display: none;
+      }
+    }
+
+    .card {
+      margin-bottom: 10px;
+    }
+
+    .card-text {
+      color:#531A2E;
+      &.hidden{
+        display:none;
+      }
+    
+    }
+
+    #dot-loader {
+        display: flex;
+      
+        &.hidden {
+          display: none;
+        }
+      }
+
+      .dot-container {
+        display: flex;
+
+        &.hidden {
+          display: none;
+        }
+      }
     </style>
   </head>
 
   <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
   <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
     <header
-      style="background-color: #FBD0DE; padding: 15px; text-align: center"
+      style="padding: 10px; text-align: center; font-size: 30px;"
     >
     
 
     
-      <div class="navbar">
-        <h1>All Trips</h1>
-        <div class="add-button">+</div>
-        <a href="/dashboard.html" class="back-button">&larr; Back</a>
-      </div>
+      <!-- <div class="navbar"> -->
+        <h1 style="text-align: center; align-content: center;">All Trips</h1>
+        <!-- <div class="add-button">+</div>
+        <a href="/dashboard" class="back-button">&larr; Back</a> -->
+      <!-- </div> -->
     </header>
 
     <div class="site-view">
@@ -76,13 +134,153 @@
       </nav>
 
       <main>
+        <div id="trips-header" class="menu-bar">
+          <button class="btn btn-secondary menu-bar" style="padding: 5px; align-content: flex-end; padding-left: 10px; padding-right: 10px; background-color: #531A2E" role="button">New</button>
+          <a class="btn btn-secondary menu-bar" style="padding: 5px; align-content: flex-end;" href="/dashboard" role="button">Back</a>
+        </div>
         
-        <p>
-            Under construction.
-        </p>
+        <!-- <div id="trip-planner">
+          <div class="trip-container">
+            <div class="trip-header">Shanghai, China (March 2024)</div>
+            <button onclick="toggleDetails('shanghai-details')">Toggle Details</button>
+            <div id="shanghai-details" class="trip-details">
+              <div class="loading">Loading trip details...</div>
+            </div>
+          </div>
+        
+          <div class="trip-container">
+            <div class="trip-header">Agra, India (December 2025)</div>
+            <button onclick="toggleDetails('agra-details')">Toggle Details</button>
+            <div id="agra-details" class="trip-details">
+            </div>
+          </div>
+        
+          <div class="trip-container">
+            <div class="trip-header">Melbourne, Australia (May 2024)</div>
+            <button onclick="toggleDetails('melbourne-details')">Toggle Details</button>
+            <div id="melbourne-details" class="trip-details">
+            </div>
+          </div>
+        
+          <div class="trip-container">
+            <div class="trip-header">Victoria, Seychelles (July 2019)</div>
+            <button onclick="toggleDetails('victoria-details')">Toggle Details</button>
+            <div id="victoria-details" class="trip-details">
+            </div>
+          </div>
+        </div> -->
+
+        <div class="card">
+          <div class="card-header" style="background-color: #FBD0DE;">
+            December 2025
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Agra, India</h5>
+            
+            <a id="india-details" class="btn btn-outline-dark">Details</a>
+            <p class="card-text india-details hidden">With supporting text below as a natural lead-in to additional content.</p>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" style="background-color: #FBD0DE;">
+            May 2024
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Melbourne, Australia</h5>
+            
+            <a id="aus-details" class="btn btn-outline-dark">Details</a>
+            <p class="card-text aus-details hidden">With supporting text below as a natural lead-in to additional content.</p>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" style="background-color: #FBD0DE;">
+            March 2024
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Shanghai, China</h5>
+            
+            <a id="china-details" class="btn btn-outline-dark">Details</a>
+            <p class="card-text china-details hidden">With supporting text below as a natural lead-in to additional content.</p>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" style="background-color: #FBD0DE;">
+            July 2019
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Victoria, Seychelles</h5>
+            
+            <a id="victoria-details" class="btn btn-outline-dark">Details</a>
+            <p class="card-text victoria-details hidden">With supporting text below as a natural lead-in to additional content.</p>
+          </div>
+        </div>
+        <br><br><br>
+        
+        <script>
+          // JavaScript for toggling the display of trip details
+          function toggleDetails(detailsId) {
+            var details = document.getElementById(detailsId);
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+          }
+
+          //china details button expansion
+          document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('china-details').addEventListener('click', function() {
+              if (document.querySelector('.china-details').classList.contains("hidden")) {
+                document.querySelector('.china-details').classList.remove('hidden');
+              } else {
+                document.querySelector('.china-details').classList.add('hidden');
+              }
+            });
+          });
+
+          //india details button expansion
+          document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('india-details').addEventListener('click', function() {
+              if (document.querySelector('.india-details').classList.contains("hidden")) {
+                document.querySelector('.india-details').classList.remove('hidden');
+              } else {
+                document.querySelector('.india-details').classList.add('hidden');
+              }
+            });
+          });
+
+          //australia details button expansion
+          document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('aus-details').addEventListener('click', function() {
+              if (document.querySelector('.aus-details').classList.contains("hidden")) {
+                document.querySelector('.aus-details').classList.remove('hidden');
+              } else {
+                document.querySelector('.aus-details').classList.add('hidden');
+              }
+            });
+          });
+
+          //seychelles details button expansion
+          document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('victoria-details').addEventListener('click', function() {
+              if (document.querySelector('.victoria-details').classList.contains("hidden")) {
+                document.querySelector('.victoria-details').classList.remove('hidden');
+              } else {
+                document.querySelector('.victoria-details').classList.add('hidden');
+              }
+            });
+          });
+        </script>
+        
+     
       </main>
     </div>
 
+
+
+  
   </body>
   <script>
     // Get the current page URL

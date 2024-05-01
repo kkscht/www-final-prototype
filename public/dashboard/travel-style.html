@@ -20,11 +20,11 @@
 
    <style>
     h1 {
-     font-family: "Arial Black";
-     text-align: left;
-     color: #E91E63;
+     font-family: "Cabin";
+     text-align: center;
+     /* color: #E91E63;
      -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: black; */
     }
     .tags {
         margin: 15px;
@@ -86,19 +86,22 @@
   <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
   <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
     <header
-      style="background-color: #FBD0DE; padding: 15px; text-align: center"
+      style="padding: 10px; text-align: center; font-size: 30px;"
     >
-    
+    <h1>Travel Style</h1>
 
     
-      <div class="navbar">
+      <!-- <div class="navbar">
         <h1>Travel Style</h1> <a href="/dashboard/edit-profile" class="back-button">&larr; Back</a>
         <div><p>Let everyone know what what type of traveller you are!</p></div>
        
-      </div>
+      </div> -->
     </header>
 
- 
+    <div style="display: flex; justify-content: center;text-align: center; margin: 20px;">
+      <p>Let everyone know what what type of traveller you are!</p>
+    </div>
+
    
 
       
@@ -132,7 +135,12 @@
         </div>
         </div>
         </div>
-        <button id="submit" type="submit" class="update-button">Update</button>
+        </div>
+        <!-- <button id="submit" type="submit" class="update-button">Update</button> -->
+        <div id="trips-header" class="menu-bar" style="justify-content: space-around;">
+          <a class="btn btn-secondary menu-bar" style="padding: 5px; justify-content: center;flex:0.5; margin-right: 10px; margin-left:10px" href="/dashboard" role="button">Cancel</a>
+          <button id="submit" type="submit" class="btn button" style="background-color: #531A2e; color: #f0f0f0;flex:1; margin-right: 10px;">Update</button>
+        </div>
     </form>
 
 
@@ -181,6 +189,7 @@
                    
                 });
                 alert("Travel style updated!");
+                window.location = "/dashboard/edit-profile"
             });
         });
 

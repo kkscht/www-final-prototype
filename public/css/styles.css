@@ -114,14 +114,6 @@ nav a.active i {
   align-items: flex-end; /* Align buttons to the right */
 }
 
-.map-buttons-hidden {
-  display: none;
-}
-
-.exit-button-visible {
-  display: flex;
-}
-
 /* Style for each individual map button */
 .map-button {
   background-color: #FBD0DE;
@@ -160,23 +152,6 @@ nav a.active i {
   flex-direction: row; /* Stack buttons vertically */
 }
 
-#exitButton {
-  position: absolute;
-  top: 20px; /* Adjust top position as needed */
-  right: 15px; /* Adjust right position as needed */
-  z-index: 1; /* Ensure buttons are above the map */
-  display: none;
-  align-items: flex-end;
-}
-
-.search-bar-hidden {
-  display: none;
-}
-
-.search-bar-visible {
-  display: block;
-}
-
 /* Style for search bar input*/
 .search-bar input[type="text"] {
   border-radius: 50px; /* Adjust the border-radius to make it rounded */
@@ -188,6 +163,86 @@ nav a.active i {
 .search-bar input[type="text"]:focus {
   border-color: #f16291; /* Optional: Adjust border color on focus */
 }
+
+/* Style for bottom sheet container */
+.bottom-sheet-container {
+  background: #ffff;
+  position: relative;
+  width: 100%;
+  min-height: 50vh;
+  position: absolute;
+  z-index: 2;
+  border-radius: 15px;
+  transition: all 0.2s ease-in-out;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+}
+
+#addReportBottomSheet {
+  background: #ffff;
+}
+
+#searchResultsBottomSheet {
+  background: #ffff;
+}
+
+.bottom-sheet-title {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+/* Style for back button on map section*/
+.back-button-map {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Solid border */
+hr.solid {
+  border-top: 1px solid #212121;
+  width: 100%;
+  margin-top: 0px;
+}
+
+.star {
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star.selected {
+  color: #F16291; /* Change to the color you want for selected stars */
+}
+
+.label {
+  margin-right: 5px;
+  cursor: pointer;
+  background-color: #fbd0de;
+  color: #fff;
+}
+
+.label.selected {
+  background-color: #f16291; /* Dark pink color when selected */
+}
+
+.bottom-sheet-form {
+  margin: 15px;
+  margin-top: 0;
+}
+
+.submit-button-container {
+  text-align: center; /* Center align the contents */
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+
 
 /*
   ////////////////////////////////////////////////////////////////////////////////////

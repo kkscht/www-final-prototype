@@ -336,8 +336,15 @@
   
          <div class="section-info">  <!-- planet-info -->
           <h2>General Safety</h2>
-          <!-- <h4>:</h4> -->
+          <br>
+          <h4>Overview</h4>
           <p id="safety-display" class="dot-flashing phone-number"></p>
+          <h4>Safety "Do's"</h4>
+          <p id="dos-display" class="dot-flashing phone-number"></p>
+          <br>
+          <h4>Safety "Don'ts"</h4>
+          <p id="donts-display" class="dot-flashing phone-number"></p>
+          <br><br>
         </div>
       </div>
 
@@ -613,6 +620,7 @@
     ////////// START OF SMART SAFETY RECOMMENDATIONS //////////
     //////////////////////////////////////////////////////////
     async function getSmartSafety(smartCall) {
+      const locationForFetch = userCity + ", " + userState + ", " + userCountry;
       console.log(smartCall);
       console.log(safetySmartCall);
       if (smartCall===true||safetySmartCall===true) {
@@ -620,14 +628,14 @@
       } else {
         // fetch to Llama 3 model for Dos and Dont's
         safetySmartCall = true;
-        const locationForFetch = userCity + ", " + userState + ", " + userCountry;
+        // OVERVIEW CALL
         const response = await fetch(
-          'https://noggin.rea.gent/zygotic-tern-3113',
+          'https://noggin.rea.gent/famous-squid-7203',
           {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: 'Bearer rg_v1_38ej8kj0y2nrrz3zagodeg2h2s3i3gklz2th_ngk',
+              Authorization: 'Bearer rg_v1_f6sanxt2e99otu2at58xo9syzggyrzxlth14_ngk',
             },
             body: JSON.stringify({
               // fill variables here.
@@ -636,17 +644,73 @@
           }
         ).then(response => response.text());
         console.log(response);
-        console.log("Response from LLAMA done, calling GPT 3.5 for formatting");
-
+        
         /// fun call for now
         console.log("called safetyResponseLoaded");
         document.getElementById("safety-display").classList.remove("dot-flashing");
         document.getElementById("safety-display").innerHTML = "<p>" + response + "<br><br><br>";
-        // GPT 3.5 call for formatting
+        // OVERVIEW CALL OVER
+        /////////////////////
+
+        ////////////////////
+        // SAFETY DO'S 
+        ////////////////////
+        console.log(exampleDosSafetyResponse);
+        document.getElementById("dos-display").classList.remove("dot-flashing");
+        const travelTips = exampleDosSafetyResponse['TravelTips'] || [];
+        const dosDisplay = document.getElementById("dos-display");
+        dosDisplay.textContent = '';
+
+        travelTips.forEach(tip => {
+          const tipElement = document.createElement('div');
+          tipElement.classList.add('travel-tip');
+
+          const tipTitle = document.createElement('h5');
+          tipTitle.textContent = tip['Tip'];
+          tipElement.appendChild(tipTitle);
+
+          const tipDescription = document.createElement('p');
+          tipDescription.textContent = tip['Description'];
+          tipElement.appendChild(tipDescription);
+
+          const tipSpacer = document.createElement('br');
+          tipElement.appendChild(tipSpacer);
+
+          dosDisplay.appendChild(tipElement);
+        });
+
+        ////////////////////
+        // SAFETY DON'TS 
+        ////////////////////
+        console.log(exampleDontsSafetyResponse);
+        document.getElementById("donts-display").classList.remove("dot-flashing");
+        const travelTipsDonts = exampleDontsSafetyResponse['TravelTips'] || [];
+        const dontsDisplay = document.getElementById("donts-display");
+        dontsDisplay.textContent = '';
+
+        travelTipsDonts.forEach(tip => {
+          console.log("in safety don'ts creating items");
+          const tipElementD = document.createElement('div');
+          tipElementD.classList.add('travel-tip');
+
+          const tipTitle = document.createElement('h5');
+          tipTitle.textContent = tip['Tip'];
+          tipElementD.appendChild(tipTitle);
+
+          const tipDescription = document.createElement('p');
+          tipDescription.textContent = tip['Description'];
+          tipElementD.appendChild(tipDescription);
+
+          const tipSpacer = document.createElement('br');
+          tipElementD.appendChild(tipSpacer);
+
+          dontsDisplay.appendChild(tipElementD);
+        });
 
         
       } // end bracket for all smart calls
     }
+
 
     /////////// END OF SMART SAFETY RECOMMENDATIONS ///////////
     //////////////////////////////////////////////////////////
@@ -709,24 +773,56 @@
       };
 
 
-        const exampleSafetyResponse = {
-            "Introduction": "Traveling alone as a young woman can be an empowering and enriching experience, but it's important to prioritize safety and cultural awareness. Here are some tips for a woman in her 20s traveling alone to Berkeley, CA, as a U.S. citizen who speaks English and Arabic.",
-            "Dos": [
-              "Do research the local laws, customs, and cultural norms of Berkeley and the surrounding areas to avoid unintentionally offending or putting yourself in an uncomfortable situation.",
-              "Do dress modestly and respectfully, especially when visiting religious or cultural sites.",
-              "Do learn a few basic phrases in Arabic to help you navigate and communicate with Arabic-speaking communities in the area.",
-              "Do keep copies of your important documents (passport, ID, etc.) separate from the originals and leave a copy with someone you trust back home.",
-              "Do stay aware of your surroundings and trust your instincts if a situation feels unsafe."
-            ],
-            "Donts": [
-              "Don't carry large amounts of cash or valuables with you, and avoid wearing expensive jewelry or flashing expensive items.",
-              "Don't accept rides, food, or drinks from strangers, and be cautious about accepting help from people you don't know.",
-              "Don't leave your belongings unattended, even for a short period of time.",
-              "Don't share too much personal information with strangers, including your accommodation details or travel plans.",
-              "Don't wander alone in isolated or poorly lit areas, especially at night."
-            ] 
-          };
-          console.log(exampleSafetyResponse);
+    const exampleDosSafetyResponse = {
+      "TravelTips": [
+        {
+          "Tip": "Research Berkeley's neighborhoods",
+          "Description": "Familiarize yourself with the different areas of Berkeley, such as Downtown, Gourmet Ghetto, and Northside, to know where to stay, eat, and explore."
+        },
+        {
+          "Tip": "Download local transportation apps",
+          "Description": "Get familiar with Bay Area transit apps like BART, AC Transit, and 511 Trip Planner to navigate the city easily."
+        },
+        {
+          "Tip": "Explore beyond campus",
+          "Description": "While UC Berkeley is a must-visit, venture out to discover Berkeley's vibrant street art, independent bookstores, and eclectic cafes."
+        },
+        {
+          "Tip": "Take a photography walk",
+          "Description": "Capture Berkeley's unique architecture, murals, and scenic views on a self-guided photography walk around the city."
+        },
+        {
+          "Tip": "Attend local events and festivals",
+          "Description": "Check out Berkeley's event calendars to catch cultural festivals, farmers' markets, or outdoor concerts that showcase the city's diversity."
+        }
+      ]
+    };
+    // console.log(exampleDosSafetyResponse);
+
+    const exampleDontsSafetyResponse = {
+      "TravelTips": [
+        {
+          "Tip": "Don't assume everyone speaks English",
+          "Description": "Even in the US, not everyone speaks English fluently. Be prepared to use hand gestures, translation apps, or ask for help when communicating with locals."
+        },
+        {
+          "Tip": "Don't flash your valuables",
+          "Description": "Avoid displaying expensive jewelry, watches, or large amounts of cash in public to minimize the risk of theft or attracting unwanted attention."
+        },
+        {
+          "Tip": "Don't walk alone at night in unfamiliar areas",
+          "Description": "Stick to well-lit and populated areas, especially at night. If you need to walk alone, keep your phone close and be aware of your surroundings."
+        },
+        {
+          "Tip": "Don't leave drinks unattended",
+          "Description": "Be cautious of drink spiking or tampering, especially in crowded areas or bars. Keep an eye on your drink at all times and avoid leaving it unattended."
+        },
+        {
+          "Tip": "Don't neglect to research local customs and laws",
+          "Description": "Familiarize yourself with Berkeley's specific laws and cultural norms to avoid unintentionally offending locals or getting into trouble."
+        }
+      ]
+    };
 
         function responseLoaded(lat, long, resp) { // leave room for real response var in func
           console.log("called responseLoaded");

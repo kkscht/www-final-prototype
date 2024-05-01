@@ -20,11 +20,11 @@
 
    <style>
     h1 {
-     font-family: "Cabin";
-     text-align: center;
-     /* color: #E91E63;
+     font-family: "Arial Black";
+     text-align: left;
+     color: #E91E63;
      -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black; */
+    -webkit-text-stroke-color: black;
     }
     .tags {
         margin: 15px;
@@ -57,10 +57,25 @@
 /* Button that looks like a tag */
 .tag-btn {
     background: none;
-        border: 2px solid #E91E63;
+        border: 3px solid #86888e;
         border-radius: 30px;
         padding: 4px 10px;
         margin: 3px;
+
+        font-size: 18px;
+        color: #86888e;
+        cursor: pointer;
+        outline: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tag-btn-other {
+    background: #FBD0DE;
+        border: 3px solid black;
+        border-radius: 30px;
+        padding: 4px 10px;
+        margin: 3px;
+
 
         font-size: 18px;
         color: black;
@@ -79,6 +94,7 @@
 .tag-btn.selected {
   background-color: #E91E63;
   color: #FFF;
+  border: 3px solid #E91E63;
 }
     </style>
   </head>
@@ -86,19 +102,20 @@
   <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
   <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
     <header
-      style="padding: 10px; text-align: center"
+      style="background-color: #FBD0DE; padding: 15px; text-align: center"
     >
-    <h1>Languages</h1>
-
     
-      <!-- <div class="navbar">
-        <h1>Languages</h1> <a href="/dashboard/edit-profile" class="back-button">&larr; Back</a>
+
+   
+    
+      <div class="navbar">
+        <h1>Languages</h1> <a href="/dashboard/edit-profile" class="btn btn-secondary hidden" style="padding: 5px; margin-top: 15px;">&larr;</a>
         <div><p>Let everyone know what what languages you can speak!</p></div>
        
-      </div> -->
+      </div>
     </header>
 
-    <div style="display: flex; justify-content: center;text-align: center; margin: 20px;"><p>Let everyone know what what languages you can speak!</p></div>
+ 
    
 
       
@@ -111,7 +128,63 @@
             <div class="custom-scroll">
   
         <div class="tags">
-            <button type="button" class="tag-btn" id="">Other <img class="edit" src="/images/edit.png"></button>
+            
+
+    <div class="other">
+
+      <div
+  role="button"
+  tabindex="0"
+  data-bs-toggle="modal"
+  data-bs-target="#profilePicModal"
+>
+<button type="button" class="tag-btn-other">Other <img class="edit" src="/images/edit.png"></button>
+</div>
+
+
+  <!-- This is where the popup modal lives. It won't render until the profile pic is clicked. -->
+
+  
+  <div
+  class="modal fade"
+  id="profilePicModal"
+  tabindex="-1"
+  aria-labelledby="profilePicModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <label for="userInput">Enter a language:</label>
+        <input type="text" id="userInput" name="userInput" required>
+        <button  style="padding: 5px 30px; margin-top: 10px;" type="submit" class="update-button">Add</button>
+
+        <!-- Add a file uploader component here! -->
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+</div>
+
             <button type="button" class="tag-btn">English</button>
             <button type="button" class="tag-btn">French</button>
             <button type="button" class="tag-btn">Spanish</button>
@@ -120,12 +193,7 @@
         </div>
         </div>
         </div>
-        </div>
-        <!-- <button id="submit" type="submit" class="update-button">Update</button> -->
-        <div id="trips-header" class="menu-bar" style="display: flex; justify-content: space-around;">
-          <a class="btn btn-secondary menu-bar" style="justify-content: center;flex:0.5; margin-right: 10px; margin-left:10px;" href="/dashboard/edit-profile" role="button">Cancel</a>
-          <button id="submit" type="submit" class="btn button" style="align-items: center; background-color: #531A2e;justify-content: center; display:flex; color: #f0f0f0;flex:1; margin-right: 10px;">Update</button>
-        </div>
+        <button id="submit" type="submit" class="update-button">Update</button>
     </form>
 
 
@@ -174,7 +242,6 @@
                    
                 });
                 alert("Languages updated!");
-                window.location = "/dashboard/edit-profile"
             });
         });
 

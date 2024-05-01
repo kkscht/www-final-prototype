@@ -62,8 +62,8 @@ nav a i {
   font-size: 32px; 
   position: absolute; 
   top: -30px; 
-  color: inherit; 
 }
+
 
 /* Style for active nav link */
 nav a.active {
@@ -216,7 +216,6 @@ nav a.active i {
 main {
   background-color: white;
   flex: 6;
-  padding: 0 20px;
 
 }
 
@@ -318,6 +317,10 @@ footer {
     font-size: 8px;
   }
 
+  .nav-link {
+    color: black;
+  }
+
   nav a i {
     font-size: 16px;
   }
@@ -325,6 +328,7 @@ footer {
 
   
   .dashboard {
+    
     text-align: center;
     
   }
@@ -335,8 +339,14 @@ footer {
   }
   
   .profile {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    background-color: #FBD0DE;
+    margin: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+
   }
   
 
@@ -346,6 +356,7 @@ footer {
     height: 110px;
     border-radius: 50%;
     border: 1.5px solid #E91E63;
+    
 
   }
   
@@ -384,17 +395,7 @@ footer {
     }
   }
 
-  .profile-info {
-    background: #FBD0DE;
-    border: 1.5px solid black;
-    padding: 0px 10px;
-    font-size: 10px;
-    color: black;
-    cursor: pointer;
-    outline: none;
-    height: 400px;
-    border-top: none;
-  }
+
 
 h5 {
   text-align: left;
@@ -402,13 +403,7 @@ h5 {
 
 }
 
-.content {
-    height: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 95%;
-    float: left;
-}
+
 
 
 
@@ -424,7 +419,7 @@ p {
 }
 
 .tags span {
-    background: none;
+    background: #FBD0DE;
     border: 1px solid #E91E63;
     border-radius: 20px;
     padding: 4px 8px;
@@ -632,7 +627,7 @@ textarea {
   border-top: 1px solid rgb(219, 219, 219);
 }
 .tabSection {
-  background: #FBD0DE;
+
   border-right: 1.5px solid black;
   border-top: 1.5px solid black;
   fill: gray;
@@ -642,30 +637,24 @@ textarea {
   align-items: center;
 }
 
-.tabSection a {
-  display: flex;
-  justify-content: space-around;
-  height: 44px;
-  align-items: center;
+
+
+
+
+.tab  {
+
+  width: 45%;
+  padding: 10px;
+
 }
 
-
-.tabSection.tab-link {
-  border-bottom: black;
+.tab.active-tab  {
+  width: 45%;
+  background-color: white;
+  padding: 10px;
 }
 
-a.tab-link  {
-  border-left: 1.5px solid black;
-  width: 150%;
-  border-bottom: 1.5px solid black;
-}
-
-a.tab-link.active-tab  {
-  width: 150%;
-  border-bottom: 1.5px solid #FBD0DE;
-}
-
-.tab-link.active-tab svg {
+.active-tab svg {
   fill: #F16291;
 
 }
@@ -694,3 +683,10 @@ a.tab-link.active-tab  {
   top: 0px;
   right: 0px;
 }
+
+.p-4 {
+  background-color:#FBD0DE;
+}
+
+
+

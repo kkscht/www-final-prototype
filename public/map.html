@@ -138,9 +138,7 @@
             </button>
             <h4 style="font-weight: medium; margin-top: 10px;">Search Results</h4>
           </div>
-          <div class="search-results" id="searchResultsList">
-
-          </div>
+          <div class="search-results" id="searchResultsList"></div>
         </div>
       </div>
     </div>
@@ -149,6 +147,12 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr7TfjKOJDd-_u7gMjc4grL9WVC4F3TvI&libraries=places&callback=initMap" async defer></script>
     
     <script>
+      /* ************************************************************************************
+
+      Pink Nav Bar Icon
+      
+      ************************************************************************************ */ 
+
       // Make the nav bar link pink when it is active
       var currentPageUrl = window.location.href;
       var navLinks = document.querySelectorAll('nav a');
@@ -157,6 +161,13 @@
           navLink.classList.add('active');
         }
       });
+
+
+      /* ************************************************************************************
+
+      Initialize Google Map API
+      
+      ************************************************************************************ */ 
 
       // Initialize the Google Map API
       async function initMap() {
@@ -240,22 +251,22 @@
           // Perform a text search for places based on the user's input query
           var request = {
             location: map.getCenter(),
-            radius: '5000', // Adjust the radius as needed
-            query: location // Use the user's input query as the search query
-          };
+              radius: '5000', // Adjust the radius as needed
+              query: location // Use the user's input query as the search query
+            };
 
           var service = new google.maps.places.PlacesService(map);
           service.textSearch(request, function(results, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-              // Loop through each result and create a list item to display the name
-              for (var i = 0; i < results.length; i++) {
-                var result = results[i];
-                var listItem = document.createElement('div');
-                listItem.textContent = result.name;
-              }
+              // Display the search results
+              searchBottomSheet.style.visibility = 'visible';
+              renderSearchResults(results);
+            } else {
+              console.error('Text search failed due to: ' + status);
             }
           });
         }
+
       }
 
       // Function to create a marker for a place
@@ -275,11 +286,18 @@
 
       initMap();
 
+
       // Get references to the search bar, back button, bottom sheet
       var searchBar = document.getElementById('searchBar');
       var backButtonMap = document.getElementById('backButtonMap');
       var addReportBottomSheet = document.getElementById('addReportBottomSheet');
       var searchBottomSheet = document.getElementById('searchResultsBottomSheet');
+
+      /* ************************************************************************************
+
+      Search Button Functionality
+      
+      ************************************************************************************ */ 
 
       // Add event listener to the search button
       var searchButton = document.getElementById('searchButton');
@@ -310,32 +328,55 @@
 
       // Function to render search results
       function renderSearchResults(results) {
-          // Get a reference to the search results container
-          var searchResultsContainer = document.getElementById('searchResultsList');
-          
-          
-          // Clear any previous search results
-          searchResultsContainer.innerHTML = '';
+        console.log(results);
+        // Get a reference to the search results container
+        var searchResultsContainer = document.getElementById('searchResultsList');
+        
+        // Clear any previous search results
+        searchResultsContainer.innerHTML = '';
 
-          // Check if there are any results
-          if (results.length > 0) {
-              // Create a list to hold the search results
-              var resultList = document.createElement('ul');
+        // Check if there are any results
+        if (results.length > 0) {
+          var resultList = document.createElement('ul');
 
-              // Loop through each result and create a list item to display the name
-              for (var i = 0; i < results.length; i++) {
-                  var result = results[i];
-                  var listItem = document.createElement('li');
-                  listItem.textContent = result.name;
-                  resultList.appendChild(listItem);
-              }
+          // Loop through each result and create a list item to display the name
+          for (var i = 0; i < results.length; i++) {
+            var result = results[i];
+            var listItem = document.createElement('li');
+            // Name
+            var nameElement = document.createElement('h5');
+            nameElement.textContent = result.name;
+            listItem.appendChild(nameElement);
 
-              // Append the list of results to the search results container
-              searchResultsContainer.appendChild(resultList);
-          } else {
-              // Display a message if no results were found
-              searchResultsContainer.textContent = 'No results found.';
+            // Address
+            var addressElement = document.createElement('p');
+            addressElement.textContent = result.formatted_address;
+            listItem.appendChild(addressElement);
+
+            // Rating
+            if (result.rating) {
+              var ratingElement = document.createElement('p');
+              ratingElement.textContent = 'Rating: ' + result.rating;
+              listItem.appendChild(ratingElement);
+            }
+
+            listItem.setAttribute('data-address', result.formatted_address); // Store the address in a data attribute
+            resultList.appendChild(listItem);
+
+            // Add click event listener to each search result item
+            listItem.addEventListener('click', function() {
+              // Populate the address field with the selected place's address
+              var selectedAddress = this.getAttribute('data-address');
+              document.getElementById('address').value = selectedAddress;
+            });
           }
+
+          // Append the list of results to the search results container
+          searchResultsContainer.appendChild(resultList);
+        } else {
+          // Display a message if no results were found
+          searchResultsContainer.textContent = 'No results found.';
+        }
       }
 
       // Add event listener to the back button for search
@@ -344,7 +385,11 @@
       });
 
 
+      /* ************************************************************************************
 
+      Add Button Functionality
+      
+      ************************************************************************************ */ 
 
       // Add event listener to the add button
       var addButton = document.getElementById('addButton');
@@ -403,31 +448,6 @@
       // Call the function to populate the address field
       getCurrentAddress();
 
-      // Add event listener to the map
-      map.addListener('click', function(event) {
-          // Get the latitude and longitude coordinates of the clicked point
-          var clickedLatLng = event.latLng;
-          
-          // Perform reverse geocoding to get the address corresponding to the clicked point
-          var geocoder = new google.maps.Geocoder();
-          geocoder.geocode({ location: clickedLatLng }, function(results, status) {
-              if (status === 'OK') {
-                  if (results[0]) {
-                      // Get the formatted address from the geocoding results
-                      var formattedAddress = results[0].formatted_address;
-                      
-                      // Update the address field in the form with the retrieved address
-                      document.getElementById('address').value = formattedAddress;
-                  } else {
-                      console.error('No results found for reverse geocoding.');
-                  }
-              } else {
-                  console.error('Reverse geocoding failed due to: ' + status);
-              }
-          });
-      });
-
-
       // Function to handle star rating selection
       function handleStarRating() {
         const stars = document.querySelectorAll('.star');
@@ -472,6 +492,49 @@
           }
         });
         document.getElementById('selectedLabels').value = selectedLabels.join(', ');
+      }
+
+      // Add event listener to the submit button
+      var submitButton = document.getElementById('submitButton');
+      submitButton.addEventListener('click', function() {
+        // Capture report data from form fields
+        var address = document.getElementById('address').value;
+        var safetyRating = document.getElementById('safetyRating').value;
+        var reportSummary = document.getElementById('reportSummary').value;
+        var selectedLabels = document.getElementById('selectedLabels').value;
+
+
+        // Create a report object
+        var report = {
+          address: address,
+          safetyRating: safetyRating,
+          reportSummary: reportSummary,
+          selectedLabels: selectedLabels
+        };
+
+        // Save report data to local storage
+        localStorage.setItem('report', JSON.stringify(report));
+
+        // Display icon at specified location
+        displayReportIcon(address);
+      });
+
+      // Function to display report icon at specified location
+      function displayReportIcon(address) {
+        // Use Google Maps geocoding to get latitude and longitude of address
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': address }, function(results, status) {
+          if (status === 'OK') {
+            var location = results[0].geometry.location;
+            var marker = new google.maps.Marker({
+              position: location,
+              map: map,
+              title: 'Report Location'
+            });
+          } else {
+            console.error('Geocode was not successful for the following reason: ' + status);
+          }
+        });
       }
 
 

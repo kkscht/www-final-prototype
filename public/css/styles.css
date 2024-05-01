@@ -170,6 +170,7 @@ nav a.active i {
   position: relative;
   width: 100%;
   min-height: 50vh;
+  max-height: 70vh;
   position: absolute;
   z-index: 2;
   border-radius: 15px;
@@ -186,6 +187,11 @@ nav a.active i {
 
 #searchResultsBottomSheet {
   background: #ffff;
+}
+
+.search-results {
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .bottom-sheet-title {

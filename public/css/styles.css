@@ -113,6 +113,14 @@ nav a.active i {
   align-items: flex-end; /* Align buttons to the right */
 }
 
+.map-buttons-hidden {
+  display: none;
+}
+
+.exit-button-visible {
+  display: flex;
+}
+
 /* Style for each individual map button */
 .map-button {
   background-color: #FBD0DE;
@@ -146,7 +154,18 @@ nav a.active i {
   top: 20px; /* Adjust top position as needed */
   left: 15px; /* Adjust right position as needed */
   z-index: 1; /* Ensure buttons are above the map */
-  align-items: flex-start; /* Align buttons to the right */
+  align-items: start; /* Align buttons to the right */
+  display: flex;
+  flex-direction: row; /* Stack buttons vertically */
+}
+
+#exitButton {
+  position: absolute;
+  top: 20px; /* Adjust top position as needed */
+  right: 15px; /* Adjust right position as needed */
+  z-index: 1; /* Ensure buttons are above the map */
+  display: none;
+  align-items: flex-end;
 }
 
 .search-bar-hidden {

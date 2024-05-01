@@ -32,7 +32,7 @@
   </head>
 
   <!-- you can also specify styles straight in html! Let's use Courier New and brown text on this page.-->
-  <body style="font-family: Arial; color: #14130f">
+  <body style="color: #14130f">
 
 
     <div class="site-view">
@@ -62,15 +62,16 @@
         <!-- Map -->
         <div id="map"></div>
         <!-- Buttons -->
-        <div class="map-buttons">
+        <div class="map-buttons" id="mapButtons">
           <button class="map-button" id="searchButton" aria-label="Search"><i class="bi bi-search"></i></button>
-          <button class="map-button" aria-label="Add"><i class="bi bi-plus-lg"></i></button>
-          <button class="map-button" aria-label="Warning"><i class="bi bi-exclamation-triangle"></i></button>
+          <button class="map-button" id="addButton" aria-label="Add"><i class="bi bi-plus-lg"></i></button>
+          <button class="map-button" id="warningButton" aria-label="Warning"><i class="bi bi-exclamation-triangle"></i></button>
         </div>
         <!-- Search Bar (initially hidden) -->
         <div class="search-bar search-bar-hidden" id="searchBar">
           <input type="text" id="searchInput" placeholder="Search location or select on map" aria-label="Search">
         </div>
+        <button class="map-button" id="exitButton" aria-label="Exit"><i class="bi bi-x-lg"></i></button>
       </div>
 
     </div>
@@ -177,10 +178,8 @@
         markers.push(marker);
       }
 
+      // Handle errors when getting user's location
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        // Handle errors when getting user's location
-        // You can customize this function to display an error message
-        // or perform other actions
         console.error("Error: The Geolocation service failed.");
       }
 
@@ -194,11 +193,38 @@
       searchButton.addEventListener('click', function() {
         document.getElementById('searchInput').value = '';
         // Toggle the visibility of the search bar
+        mapButtons.classList.toggle('map-buttons-hidden');
         searchBar.classList.toggle('search-bar-visible');
+        exitButton.classList.toggle('exit-button-visible');
         if (searchBar.classList.contains('search-bar-visible')) {
           searchButton.style.backgroundColor = "#f16291";
         } else {
           searchButton.style.backgroundColor = "#fbd0de";
+        }
+      });
+
+      // Add event listener to the add button
+      addButton.addEventListener('click', function() {
+        document.getElementById('searchInput').value = '';
+        // Toggle the visibility of the search bar
+        searchBar.classList.toggle('search-bar-visible');
+        if (searchBar.classList.contains('search-bar-visible')) {
+          addButton.style.backgroundColor = "#f16291";
+        } else {
+          addButton.style.backgroundColor = "#fbd0de";
+        }
+      });
+
+      // Add event listener to the warnings button
+      warningButton.addEventListener('click', function() {
+        document.getElementById('searchInput').value = '';
+        // Toggle the visibility of the search bar
+        searchBar.classList.toggle('search-bar-visible');
+        map
+        if (searchBar.classList.contains('search-bar-visible')) {
+          warningButton.style.backgroundColor = "#f16291";
+        } else {
+          warningButton.style.backgroundColor = "#fbd0de";
         }
       });
 

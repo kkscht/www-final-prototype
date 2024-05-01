@@ -353,6 +353,17 @@ footer {
     color: #fff;
   } */
 
+  /* For all "back" buttons at the top of the screen (below header) */
+  .menu-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    /* justify-content: space-between;
+    align-items: center; */
+    &.hidden {
+      display: none;
+    }
+  }
 
   .profile-info {
     background: #FBD0DE;

@@ -116,17 +116,24 @@
   <script>
     // Get the current page URL
     var currentPageUrl = window.location.href;
-    console.log(currentPageUrl);
+    var onDashboard = "http://localhost:8000/dashboard"
+    // console.log(currentPageUrl);
     // Get all nav links
     var navLinks = document.querySelectorAll('nav a');
-    console.log(navLinks);
+    // console.log(navLinks);
 
     // Loop through each nav link
     navLinks.forEach(function(navLink) {
       // Check if the href attribute of the nav link matches the current page URL
-      if (navLink.href === currentPageUrl) {
-        // If it matches, add the 'active' class to the nav link
+      // console.log(navLink.href);
+      // console.log(currentPageUrl);
+      if (navLink.href === onDashboard) {
+        // console.log("in for loop")
+        // // If it matches, add the 'active' class to the nav link
+        // console.log("Adding active class to " + navLink.classList);
         navLink.classList.add('active');
+        // console.log("Added " + navLink.classList);
+
       }
     });
   </script>

@@ -12,4 +12,6 @@ document.getElementById('submit').addEventListener('click', function(event){
 
 
   alert('Profile updated successfully!'); 
+  window.location= "/dashboard/";
+  
   });

@@ -60,6 +60,34 @@
         display: none;
       }
     }
+
+    .card {
+      margin-bottom: 10px;
+    }
+
+    .card-text {
+      color:#531A2E;
+      &.hidden{
+        display:none;
+      }
+    
+    }
+
+    #dot-loader {
+        display: flex;
+      
+        &.hidden {
+          display: none;
+        }
+      }
+
+      .dot-container {
+        display: flex;
+
+        &.hidden {
+          display: none;
+        }
+      }
     </style>
   </head>
 
@@ -111,44 +139,88 @@
           <a class="btn btn-secondary menu-bar" style="padding: 5px; align-content: flex-end;" href="/dashboard" role="button">Back</a>
         </div>
         
-        <div id="trip-planner">
-          <!-- Shanghai Trip -->
+        <!-- <div id="trip-planner">
           <div class="trip-container">
             <div class="trip-header">Shanghai, China (March 2024)</div>
             <button onclick="toggleDetails('shanghai-details')">Toggle Details</button>
             <div id="shanghai-details" class="trip-details">
-              <!-- Details here -->
               <div class="loading">Loading trip details...</div>
             </div>
           </div>
         
-          <!-- Agra Trip -->
           <div class="trip-container">
             <div class="trip-header">Agra, India (December 2025)</div>
             <button onclick="toggleDetails('agra-details')">Toggle Details</button>
             <div id="agra-details" class="trip-details">
-              <!-- Details here -->
             </div>
           </div>
         
-          <!-- Melbourne Trip -->
           <div class="trip-container">
             <div class="trip-header">Melbourne, Australia (May 2024)</div>
             <button onclick="toggleDetails('melbourne-details')">Toggle Details</button>
             <div id="melbourne-details" class="trip-details">
-              <!-- Details here -->
             </div>
           </div>
         
-          <!-- Victoria Trip -->
           <div class="trip-container">
             <div class="trip-header">Victoria, Seychelles (July 2019)</div>
             <button onclick="toggleDetails('victoria-details')">Toggle Details</button>
             <div id="victoria-details" class="trip-details">
-              <!-- Details here -->
             </div>
           </div>
+        </div> -->
+
+        <div class="card">
+          <div class="card-header" style="background-color: #FBD0DE;">
+            December 2025
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Agra, India</h5>
+            
+            <a id="india-details" class="btn btn-outline-dark">Details</a>
+            <p class="card-text india-details hidden">With supporting text below as a natural lead-in to additional content.</p>
+
+          </div>
         </div>
+
+        <div class="card">
+          <div class="card-header" style="background-color: #FBD0DE;">
+            May 2024
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Melbourne, Australia</h5>
+            
+            <a id="aus-details" class="btn btn-outline-dark">Details</a>
+            <p class="card-text aus-details hidden">With supporting text below as a natural lead-in to additional content.</p>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" style="background-color: #FBD0DE;">
+            March 2024
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Shanghai, China</h5>
+            
+            <a id="china-details" class="btn btn-outline-dark">Details</a>
+            <p class="card-text china-details hidden">With supporting text below as a natural lead-in to additional content.</p>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" style="background-color: #FBD0DE;">
+            July 2019
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Victoria, Seychelles</h5>
+            
+            <a id="victoria-details" class="btn btn-outline-dark">Details</a>
+            <p class="card-text victoria-details hidden">With supporting text below as a natural lead-in to additional content.</p>
+          </div>
+        </div>
+        <br><br><br>
         
         <script>
           // JavaScript for toggling the display of trip details
@@ -156,6 +228,50 @@
             var details = document.getElementById(detailsId);
             details.style.display = details.style.display === 'block' ? 'none' : 'block';
           }
+
+          //china details button expansion
+          document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('china-details').addEventListener('click', function() {
+              if (document.querySelector('.china-details').classList.contains("hidden")) {
+                document.querySelector('.china-details').classList.remove('hidden');
+              } else {
+                document.querySelector('.china-details').classList.add('hidden');
+              }
+            });
+          });
+
+          //india details button expansion
+          document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('india-details').addEventListener('click', function() {
+              if (document.querySelector('.india-details').classList.contains("hidden")) {
+                document.querySelector('.india-details').classList.remove('hidden');
+              } else {
+                document.querySelector('.india-details').classList.add('hidden');
+              }
+            });
+          });
+
+          //australia details button expansion
+          document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('aus-details').addEventListener('click', function() {
+              if (document.querySelector('.aus-details').classList.contains("hidden")) {
+                document.querySelector('.aus-details').classList.remove('hidden');
+              } else {
+                document.querySelector('.aus-details').classList.add('hidden');
+              }
+            });
+          });
+
+          //seychelles details button expansion
+          document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('victoria-details').addEventListener('click', function() {
+              if (document.querySelector('.victoria-details').classList.contains("hidden")) {
+                document.querySelector('.victoria-details').classList.remove('hidden');
+              } else {
+                document.querySelector('.victoria-details').classList.add('hidden');
+              }
+            });
+          });
         </script>
         
      

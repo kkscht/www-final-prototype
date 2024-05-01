@@ -163,9 +163,12 @@
         ></button>
       </div>
       <div class="modal-body">
-        <label for="userInput">Enter a language:</label>
-        <input type="text" id="userInput" name="userInput" required>
-        <button  style="padding: 5px 30px; margin-top: 10px;" type="submit" class="update-button">Add</button>
+        <div>
+        <label for="languageInput">Enter a language:</label>
+        <input type="text" id="languageInput" name="languageInput" required>
+        <button id="addButton" style="padding: 5px 30px; margin: 10px;" type="submit" class="update-button">Add</button>
+        </div>
+        <div id="buttonContainer"></div>
 
         <!-- Add a file uploader component here! -->
       </div>
@@ -184,7 +187,6 @@
   
 
 </div>
-
             <button type="button" class="tag-btn">English</button>
             <button type="button" class="tag-btn">French</button>
             <button type="button" class="tag-btn">Spanish</button>
@@ -247,6 +249,101 @@
 
       </script>
 
+      <script>
+      document.getElementById('addButton').addEventListener('click', function() {
+        var input = document.getElementById('languageInput');
+        var container = document.getElementById('buttonContainer');
+
+        // Create new button
+        var newButton = document.createElement('button');
+        newButton.textContent = input.value;
+        newButton.classList.add('tag-btn');
+
+        // Add click event to toggle 'active' class
+        newButton.addEventListener('click', function() {
+          var currentActive = container.querySelector('.active');
+          if (currentActive) {
+            currentActive.classList.remove('active');
+          }
+          newButton.classList.add('active');
+        });
+
+        // Append new button to the container
+        container.appendChild(newButton);
+
+ 
+        var languagesContainer = document.querySelector('.tags');
+        languagesContainer.innerHTML.appendChild(input.value);
+        languagesContainer.innerHTML = '';
+        selectedLanguages.forEach(function(tagValue) {
+            // var tagSpan = document.createElement('span');
+            // tagSpan.textContent = input.value;
+            // languagesContainer.appendChild(input.value);
+            alert(tagValue);
+        });
+
+        // // Clear the input
+        // input.value = '';
+      });
+
+      </script>
+
+      <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+  // Load and display languages from localStorage
+  var storedLanguages = JSON.parse(localStorage.getItem('selectedLanguages')) || [];
+  storedLanguages.forEach(function(lang) {
+    addLanguageButton(lang);
+  });
+
+  // Set up the Add button
+  document.getElementById('addButton').addEventListener('click', function() {
+    var input = document.getElementById('languageInput');
+    var language = input.value.trim();
+    if (language) {
+      addLanguageButton(language);
+      // Update localStorage
+      storedLanguages.push(language);
+      localStorage.setItem('selectedLanguages', JSON.stringify(storedLanguages));
+      input.value = ''; // Clear the input
+    }
+  });
+});
+
+function addLanguageButton(language) {
+  var container = document.getElementById('buttonContainer');
+  var newButton = document.createElement('button');
+  newButton.textContent = language;
+  newButton.classList.add('tag-btn');
+
+  // Add click event to toggle 'active' class
+  newButton.addEventListener('click', function() {
+    var currentActive = container.querySelector('.active');
+    if (currentActive) {
+      currentActive.classList.remove('active');
+    }
+    newButton.classList.add('active');
+  });
+
+  // Append new button to the container
+  container.appendChild(newButton);
+}
+
+      </script>
+
+  -->
+
+  <!-- <script>
+    var selectedLanguages = JSON.parse(localStorage.getItem('selectedLanguages')) || [];
+    var languagesContainer = document.querySelector('.tags');
+    languagesContainer.innerHTML = '';
+    selectedLanguages.forEach(function(tagValue) {
+        var tagSpan = document.createElement('span');
+        tagSpan.textContent = tagValue;
+        languagesContainer.appendChild(tagSpan);
+    });
+    alert()
+ </script> -->
   
 
 

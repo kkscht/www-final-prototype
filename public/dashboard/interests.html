@@ -20,12 +20,22 @@
 
    <style>
     h1 {
-     font-family: "Arial Black";
-     text-align: left;
-     color: #E91E63;
+     font-family: "Cabin";
+     text-align: center;
+     /* color: #E91E63;
      -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: black; */
     }
+    .menu-bar button {
+      /* margin-bottom: 10px;  */
+      background-color: #E91E63;
+    }
+
+    .menu-bar button:hover {
+      background: #E91E63;
+      color: #f0f0f0;
+    }
+
     .tags {
         margin-top: 0px;
     }
@@ -103,21 +113,24 @@
   <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
   <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
     <header
-      style="background-color: #FBD0DE; padding: 15px; text-align: center"
+      style="padding: 10px; text-align: center"
     >
     
 
     
-      <div class="navbar">
+      <!-- <div class="navbar">
         <h1>Interests</h1> <a href="/dashboard/edit-profile" class="btn btn-secondary hidden" style="padding: 5px; margin-top: 15px;">&larr;</a>
         <div><p>Let everyone know what you’re interested
             in by adding it to your profile!</p></div>
        
-      </div>
+      </div> -->
     </header>
 
- 
-   
+    <h1>Interests</h1>
+    <div style="display: flex; justify-content: center;text-align: center; margin: 20px;">
+      <p>Let everyone know what you’re interested
+        in by adding it to your profile!</p>
+     </div>
 
       
 
@@ -207,10 +220,13 @@
         </div>
         </div>
         </div>
+        <!-- <button id="submit" type="submit" class="update-button" style="align-content: center;">Update</button> -->
+        <div id="trips-header" class="menu-bar" style="display: flex; justify-content: space-around;">
+          <a class="btn btn-secondary menu-bar" style="justify-content: center;flex:1; margin-right: 10px; margin-left:10px;" href="/dashboard/edit-profile" role="button">Back to Edit Profile</a>
+          <button id="submit" type="submit" class="btn button" style="align-items: center; background-color: #E91E63;justify-content: center; display:flex; color: #f0f0f0;flex:1; margin-right: 10px;">Update</button>
         </div>
-        <button id="submit" type="submit" class="update-button">Update</button>
     </form>
-
+    
 
 
    

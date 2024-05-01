@@ -88,12 +88,20 @@
           display: none;
         }
       }
+      .profile {
+        background-color: #FBD0DE;
+        margin: 10px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
     </style>
   </head>
 
   <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
   <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
-    <header
+    <header class="profile"
       style="padding: 10px; text-align: center; font-size: 30px;"
     >
     
@@ -135,8 +143,8 @@
 
       <main>
         <div id="trips-header" class="menu-bar">
-          <button class="btn btn-secondary menu-bar" style="padding: 5px; align-content: flex-end; padding-left: 10px; padding-right: 10px; background-color: #531A2E" role="button">New</button>
-          <a class="btn btn-secondary menu-bar" style="padding: 5px; align-content: flex-end;" href="/dashboard" role="button">&larr;</a>
+          <button class="btn btn-secondary menu-bar" style="padding: 5px; align-content: flex-end; padding-left: 10px; padding-right: 10px; background-color: #E91E63" role="button">New</button>
+          <a class="btn btn-secondary menu-bar" style="padding: 5px; align-content: flex-end; padding-left: 15px; padding-right: 15px;" href="/dashboard" role="button">&larr;</a>
         </div>
         
         <!-- <div id="trip-planner">
@@ -170,7 +178,7 @@
           </div>
         </div> -->
 
-        <div class="card">
+        <div class="card" style="margin:10px">
           <div class="card-header" style="background-color: #FBD0DE;">
             December 2025
           </div>
@@ -183,7 +191,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="margin:10px">
           <div class="card-header" style="background-color: #FBD0DE;">
             May 2024
           </div>
@@ -196,7 +204,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="margin:10px">
           <div class="card-header" style="background-color: #FBD0DE;">
             March 2024
           </div>
@@ -209,7 +217,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="margin:10px">
           <div class="card-header" style="background-color: #FBD0DE;">
             July 2019
           </div>
@@ -285,14 +293,14 @@
   <script>
     // Get the current page URL
     var currentPageUrl = window.location.href;
-
+    var onDashboard = "http://localhost:8000/dashboard"
     // Get all nav links
     var navLinks = document.querySelectorAll('nav a');
 
     // Loop through each nav link
     navLinks.forEach(function(navLink) {
       // Check if the href attribute of the nav link matches the current page URL
-      if (navLink.href === currentPageUrl) {
+      if (navLink.href === onDashboard) {
         // If it matches, add the 'active' class to the nav link
         navLink.classList.add('active');
       }

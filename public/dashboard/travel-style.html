@@ -20,11 +20,21 @@
 
    <style>
     h1 {
-     font-family: "Arial Black";
-     text-align: left;
-     color: #E91E63;
+     font-family: "Cabin";
+     text-align: center;
+     /* color: #E91E63;
      -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: black; */
+    }
+    .profile {
+    background-color: #FBD0DE;
+    margin: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+
     }
     .tags {
         margin: 15px;
@@ -101,24 +111,25 @@
 
   <!-- you can also specify styles straight in html! Let's use Verdana on this page.-->
   <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
-    <header
-      style="background-color: #FBD0DE; padding: 15px; text-align: center"
+    
+    <header class="profile"
+      style=" padding: 10px; text-align: center"
     >
     
-
+    <h1 >Travel Style</h1>
     
-      <div class="navbar">
+      <!-- <div class="navbar">
         <h1>Travel Style</h1> <a href="/dashboard/edit-profile" class="btn btn-secondary hidden" style="padding: 5px; margin-top: 15px;">&larr;</a>
         <div><p>Let everyone know what what type of traveller you are!</p></div>
        
-      </div>
+      </div> -->
     </header>
 
- 
-   
+  
+    
+    <div style="display: flex; justify-content: center;text-align: center; margin: 20px;"><p>Let everyone know what what type of traveller you are!</p></div>
 
       
-
    
       <div class="content-container">
         <div class="edit-info">
@@ -204,8 +215,12 @@
         </div>
         </div>
         </div>
+        
+        <!-- <button id="submit" type="submit" class="update-button">Update</button> -->
+        <div id="trips-header" class="menu-bar" style="display: flex; justify-content: space-around;">
+          <a class="btn btn-secondary menu-bar" style="justify-content: center;flex:1; margin-right: 10px; margin-left:10px;" href="/dashboard/edit-profile" role="button">Back to Edit Profile</a>
+          <button id="submit" type="submit" class="btn button" style="align-items: center; background-color: #E91E63;justify-content: center; display:flex; color: #f0f0f0;flex:1; margin-right: 10px;">Update</button>
         </div>
-        <button id="submit" type="submit" class="update-button">Update</button>
     </form>
 
 

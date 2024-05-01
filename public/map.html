@@ -228,6 +228,9 @@
             map.setZoom(17);  // Set a default zoom level
           }
 
+          document.getElementById('address').value = place.formatted_address;
+          searchBottomSheet.style.visibility = 'hidden';
+
           // Get the user's input query
           var userQuery = document.getElementById('searchInput').value.trim();
 
@@ -311,6 +314,8 @@
       });
 
       searchButton.addEventListener('click', function() {
+        addReportBottomSheet.style.visibility = "hidden";
+        addButton.style.backgroundColor = "#fbd0de";
         // Get the user's input query
         var userQuery = document.getElementById('searchInput').value.trim();
 
@@ -409,9 +414,26 @@
       
       ************************************************************************************ */ 
 
+      function resetFormFields() {
+        // Reset safety rating
+        document.querySelectorAll('.star').forEach(star => star.classList.remove('selected'));
+        document.getElementById('safetyRating').value = '';
+        
+        // Reset report summary field
+        document.getElementById('reportSummary').value = '';
+        
+        // Reset selected labels
+        document.querySelectorAll('.label').forEach(label => label.classList.remove('selected'));
+        document.getElementById('selectedLabels').value = '';
+      }
+
       // Add event listener to the add button
       var addButton = document.getElementById('addButton');
+      
       addButton.addEventListener('click', function() {
+        resetFormFields();
+        searchResultsBottomSheet.style.visibility = "hidden";
+        searchButton.style.backgroundColor = "#fbd0de";
         document.getElementById('searchInput').value = '';
         // Toggle the visibility of the bottom sheet
         addReportBottomSheet.style.visibility = 'visible';
@@ -512,12 +534,14 @@
       // Add event listener to the submit button
       var submitButton = document.getElementById('submitButton');
       submitButton.addEventListener('click', function() {
+        event.preventDefault(); // Prevent default form submission behavior
+  
+        console.log('Submit button clicked'); // Log message to console
         // Capture report data from form fields
         var address = document.getElementById('address').value;
         var safetyRating = document.getElementById('safetyRating').value;
         var reportSummary = document.getElementById('reportSummary').value;
         var selectedLabels = document.getElementById('selectedLabels').value;
-
 
         // Create a report object
         var report = {
@@ -531,26 +555,56 @@
         localStorage.setItem('report', JSON.stringify(report));
 
         // Display icon at specified location
-        displayReportIcon(address);
+        displayReportIcon(address, report);
+        addReportBottomSheet.style.visibility = 'hidden';
+        addButton.style.backgroundColor = '#fbd0de';
       });
 
       // Function to display report icon at specified location
-      function displayReportIcon(address) {
+      function displayReportIcon(address, report) {
         // Use Google Maps geocoding to get latitude and longitude of address
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({ 'address': address }, function(results, status) {
           if (status === 'OK') {
             var location = results[0].geometry.location;
             var marker = new google.maps.Marker({
-              position: location,
-              map: map,
-              title: 'Report Location'
+                position: location,
+                map: map,
+                title: 'Report Location'
+            });
+
+            // Add event listener to the marker to show report information
+            marker.addListener('click', function() {
+                showReportInformation(report);
             });
           } else {
             console.error('Geocode was not successful for the following reason: ' + status);
           }
         });
       }
+
+      // Function to show report information in a bottom screen
+      function showReportInformation(report) {
+        // Get reference to the bottom sheet container for report information
+        var bottomSheet = document.getElementById('reportBottomSheet');
+
+        // Populate bottom sheet with report information
+        var reportContent = `
+          <div>
+              <h4>Report Information</h4>
+              <p><strong>Address:</strong> ${report.address}</p>
+              <p><strong>Safety Rating:</strong> ${report.safetyRating}</p>
+              <p><strong>Report Summary:</strong> ${report.reportSummary}</p>
+              <p><strong>Selected Labels:</strong> ${report.selectedLabels}</p>
+          </div>
+        `;
+
+        bottomSheet.innerHTML = reportContent;
+
+        // Show the bottom sheet
+        bottomSheet.style.visibility = 'visible';
+      }
+
 
 
     </script>

@@ -138,6 +138,7 @@
             </button>
             <h4 style="font-weight: medium; margin-top: 10px;">Search Results</h4>
           </div>
+          <hr class="solid">
           <div class="search-results" id="searchResultsList"></div>
         </div>
       </div>
@@ -170,11 +171,13 @@
       ************************************************************************************ */ 
 
       // Initialize the Google Map API
+      var map;
+      
       async function initMap() {
 
         // Initialize map with default location (Metropolitan Museum of Art)
         var defaultLocation = { lat: 37.8719, lng: -122.2585 }; // Metropolitan Museum of Art coordinates
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             center: defaultLocation,
             zoom: 15,
             disableDefaultUI: true,
@@ -260,6 +263,7 @@
             if (status == google.maps.places.PlacesServiceStatus.OK) {
               // Display the search results
               searchBottomSheet.style.visibility = 'visible';
+              searchButton.style.backgroundColor = "#f16291";
               renderSearchResults(results);
             } else {
               console.error('Text search failed due to: ' + status);
@@ -301,6 +305,11 @@
 
       // Add event listener to the search button
       var searchButton = document.getElementById('searchButton');
+
+      searchInput.addEventListener('click', function() {
+        this.select(); // Select the text inside the input field
+      });
+
       searchButton.addEventListener('click', function() {
         // Get the user's input query
         var userQuery = document.getElementById('searchInput').value.trim();
@@ -316,9 +325,16 @@
           var service = new google.maps.places.PlacesService(map);
           service.textSearch(request, function(results, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
+              
               // Display the search results
-              searchBottomSheet.style.visibility = 'visible';
-              renderSearchResults(results);
+              if(results.length > 1) {
+                searchButton.style.backgroundColor = "#f16291";
+                addReportBottomSheet.style.visibility = 'hidden';
+                searchBottomSheet.style.visibility = 'visible';
+                renderSearchResults(results);
+              } else {
+                searchButton.style.backgroundColor = "#fbd0de";
+              }
             } else {
               console.error('Text search failed due to: ' + status);
             }
@@ -381,7 +397,9 @@
 
       // Add event listener to the back button for search
       backButtonMapSearch.addEventListener('click', function() {
-        searchBottomSheet.style.display = 'none';
+        searchBottomSheet.style.visibility = 'hidden';
+        searchButton.style.backgroundColor = "#fbd0de";
+        document.getElementById('searchInput').value = '';
       });
 
 
@@ -397,16 +415,13 @@
         document.getElementById('searchInput').value = '';
         // Toggle the visibility of the bottom sheet
         addReportBottomSheet.style.visibility = 'visible';
-        if (searchBar.classList.contains('search-bar-visible')) {
-          addButton.style.backgroundColor = "#f16291";
-        } else {
-          addButton.style.backgroundColor = "#fbd0de";
-        }
+        addButton.style.backgroundColor = "#f16291";
       });
 
       // Add event listener to the back button for add
       backButtonMapAdd.addEventListener('click', function() {
-        addReportBottomSheet.style.display = 'none';
+        addReportBottomSheet.style.visibility = 'hidden';
+        addButton.style.backgroundColor = "#fbd0de";
       });
 
       // Add event listener to the warnings button

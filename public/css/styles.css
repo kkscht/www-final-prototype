@@ -208,6 +208,11 @@ nav a.active i {
   height: 100%;
 }
 
+#reportInfo {
+  background: #ffff;
+  height: 100%;
+}
+
 .search-results {
   max-height: 50vh;
   overflow-y: auto;
@@ -267,7 +272,9 @@ hr.solid {
   margin-top: 20px; /* Adjust margin as needed */
 }
 
-
+#reportContent {
+  margin: 15px;
+}
 
 /*
   ////////////////////////////////////////////////////////////////////////////////////

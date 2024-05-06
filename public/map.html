@@ -142,9 +142,26 @@
           <div class="search-results" id="searchResultsList"></div>
         </div>
       </div>
+    
+
+      <!-- Report Bottom Sheet Container -->
+      <div class="bottom-sheet-container" id="reportBottomSheet">
+        <div id="reportInfo">
+          <div class="bottom-sheet-title">
+            <button class="btn btn-secondary menu-bar back-button-map" id="backButtonMapReport" style="padding: 5px;" role="button">
+              Back
+            </button>
+            <h4 style="font-weight: medium; margin-top: 10px;">Report Information</h4>
+          </div>
+          <hr class="solid">
+          <div id="reportContent">
+            <!-- Report information will be populated here -->
+          </div>
+        </div>
+      </div>
     </div>
 
-      <!-- Google Maps API Import -->
+    <!-- Google Maps API Import -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr7TfjKOJDd-_u7gMjc4grL9WVC4F3TvI&libraries=places&callback=initMap" async defer></script>
     
     <script>
@@ -556,9 +573,50 @@
 
         // Display icon at specified location
         displayReportIcon(address, report);
+
+        resetFormFields();
         addReportBottomSheet.style.visibility = 'hidden';
         addButton.style.backgroundColor = '#fbd0de';
       });
+
+      var reportBottomSheet = document.getElementById('reportBottomSheet');
+      var bottomSheetReportContent = document.getElementById('reportContent');
+
+      // Function to show report information in the bottom sheet
+      function showReportInformation(report) {
+        // Get reference to the bottom sheet container for report information
+
+
+        // Populate bottom sheet with report information
+        var reportContent = `
+          <div>
+              <p><strong>Address:</strong> ${report.address}</p>
+              <p><strong>Safety Rating:</strong> ${report.safetyRating}</p>
+              <p><strong>Report Summary:</strong> ${report.reportSummary}</p>
+              <p><strong>Selected Labels:</strong> ${report.selectedLabels}</p>
+          </div>
+        `;
+
+        bottomSheetReportContent.innerHTML = reportContent;
+
+        // Show the bottom sheet
+        reportBottomSheet.style.visibility = 'visible';
+      }
+
+
+      var backButtonMapReport = document.getElementById('backButtonMapReport');
+      // Add event listener to the back button for search
+      backButtonMapReport.addEventListener('click', function() {
+        reportBottomSheet.style.visibility = 'hidden';
+        document.getElementById('reportContent').value = '';
+      });
+
+      // Function to handle marker click event
+      function handleMarkerClick(marker, report) {
+        marker.addListener('click', function() {
+          showReportInformation(report);
+        });
+      }
 
       // Function to display report icon at specified location
       function displayReportIcon(address, report) {
@@ -573,37 +631,76 @@
                 title: 'Report Location'
             });
 
-            // Add event listener to the marker to show report information
-            marker.addListener('click', function() {
-                showReportInformation(report);
-            });
+            // Handle marker click event
+            handleMarkerClick(marker, report);
           } else {
             console.error('Geocode was not successful for the following reason: ' + status);
           }
         });
       }
 
-      // Function to show report information in a bottom screen
-      function showReportInformation(report) {
-        // Get reference to the bottom sheet container for report information
-        var bottomSheet = document.getElementById('reportBottomSheet');
-
-        // Populate bottom sheet with report information
-        var reportContent = `
-          <div>
-              <h4>Report Information</h4>
-              <p><strong>Address:</strong> ${report.address}</p>
-              <p><strong>Safety Rating:</strong> ${report.safetyRating}</p>
-              <p><strong>Report Summary:</strong> ${report.reportSummary}</p>
-              <p><strong>Selected Labels:</strong> ${report.selectedLabels}</p>
-          </div>
-        `;
-
-        bottomSheet.innerHTML = reportContent;
-
-        // Show the bottom sheet
-        bottomSheet.style.visibility = 'visible';
+      // Function to retrieve report data from local storage and display it on the map
+      function displayReportFromLocalStorage() {
+          var storedReports = JSON.parse(localStorage.getItem('storedReports')) || [];
+          storedReports.forEach(function(item) {
+              displayReportIcon(item.position, item.report);
+          });
       }
+
+      // Call this function to display any existing report stored in local storage when the page loads
+      displayReportFromLocalStorage();
+
+      // Function to display report icon at specified location and store marker positions
+      function displayReportIconAndStorePosition(address, report) {
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ 'address': address }, function(results, status) {
+              if (status === 'OK') {
+                  var location = results[0].geometry.location;
+                  var marker = new google.maps.Marker({
+                      position: location,
+                      map: map,
+                      title: 'Report Location'
+                  });
+
+                  // Store marker position and report data in local storage
+                  var storedReports = JSON.parse(localStorage.getItem('storedReports')) || [];
+                  storedReports.push({ position: location, report: report });
+                  localStorage.setItem('storedReports', JSON.stringify(storedReports));
+
+                  // Handle marker click event
+                  handleMarkerClick(marker, report);
+              } else {
+                  console.error('Geocode was not successful for the following reason: ' + status);
+              }
+          });
+      }
+
+
+      // Function to retrieve stored marker positions and display markers
+      function displayMarkersFromLocalStorage() {
+          var storedMarkers = localStorage.getItem('markers');
+          if (storedMarkers) {
+              var markers = JSON.parse(storedMarkers);
+              markers.forEach(function(markerPos) {
+                  // Reverse geocode marker position to get address (optional)
+                  var latlng = new google.maps.LatLng(markerPos.lat, markerPos.lng);
+                  var geocoder = new google.maps.Geocoder();
+                  geocoder.geocode({ 'location': latlng }, function(results, status) {
+                      if (status === 'OK') {
+                          if (results[0]) {
+                              var address = results[0].formatted_address;
+                              displayReportIconAndStorePosition(address, null); // Pass null as report data
+                          }
+                      } else {
+                          console.error('Geocode was not successful for the following reason: ' + status);
+                      }
+                  });
+              });
+          }
+      }
+
+      // Call this function to display any existing markers stored in local storage when the page loads
+      displayMarkersFromLocalStorage();
 
 
 

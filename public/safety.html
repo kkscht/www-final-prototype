@@ -413,7 +413,7 @@
               console.log("Call safety response");
               getSmartSafety(safetySmartCall);
               //getSafety(userLatitude, userLongitude);
-            } else if (name==="Embassy" && numbersSmartCall===false) {
+            } else if (name==="Embassy" && embassySmartCall===false) {
               getEmbassy(embassySmartCall);
             }
           } else {
@@ -728,9 +728,10 @@
     ///////// START OF SMART EMBASSY/PASSPORT OFFICE //////////
     //////////////////////////////////////////////////////////
     async function getEmbassy(smartCall) {
-      if (smartCall===true || embassySmartCall===true) {
-        console.log("We already called reagent for embassy, do not recall");
-      } else {
+      // if (embassySmartCall===true) {
+      //   console.log("We already called reagent for embassy, do not recall");
+      // } else {
+        console.log("embassy call: " + embassySmartCall);
         embassySmartCall = true;
         // smart call
         const response = await fetch(
@@ -752,7 +753,7 @@
 
         document.getElementById("embassy-display").classList.remove("dot-flashing");
         document.getElementById("embassy-display").innerHTML = "<p>" + response;
-      }
+      // }
      }
 
 
